@@ -1,3 +1,11 @@
+gem_*
+gem-*
+mrb-*.a
+src/*.o
+.local.vimrc
+
+.DS_Store
+
 *.gem
 *.rbc
 /.config
