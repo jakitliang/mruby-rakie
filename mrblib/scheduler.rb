@@ -2,7 +2,7 @@
 # require_relative "./selector"
 
 module Rakie
-  class Loop
+  class Scheduler
     @instance = nil
 
     def initialize
@@ -43,7 +43,7 @@ module Rakie
     end
 
     def self.instance
-      @instance ||= Loop.new
+      @instance ||= Scheduler.new
     end
 
     def self.dispatch

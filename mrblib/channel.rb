@@ -15,15 +15,14 @@ module Rakie
 
     def on_read(io)
       begin
-        loop do
-          @read_buffer << io.read_nonblock(DEFAULT_BUFFER_SIZE)
+        origin_len = @read_buffer.length
+
+        @read_buffer << Channel.recv_nonblock(io, DEFAULT_BUFFER_SIZE)
+
+        if origin_len == @read_buffer.length
+          Log.debug("Channel #{io} closed by remote")
+          return Selector::HANDLE_FAILED if io.eof?
         end
-
-      rescue IO::EAGAINWaitReadable
-        Log.debug("Channel read pending")
-
-      rescue IO::EWOULDBLOCKWaitReadable
-        Log.debug("Channel read pending")
 
       rescue Exception => e
         # Process the last message on exception
@@ -76,33 +75,25 @@ module Rakie
       offset = 0
 
       begin
-        while @write_buffer.length > 0
-          len = io.write_nonblock(@write_buffer)
+        if @write_buffer.length > 0
+          len = Channel.send_nonblock(io, @write_buffer)
           offset += len
           @write_buffer = @write_buffer[len .. -1]
         end
 
         Log.debug("Channel write #{len} bytes finished")
 
-      rescue IO::EAGAINWaitWritable
-        self.handle_write(offset)
-
-        Log.debug("Channel write pending")
-        return Selector::HANDLE_CONTINUED
-
-      rescue IO::EWOULDBLOCKWaitWritable
-        self.handle_write(offset)
-
-        Log.debug("Channel write pending")
-        return Selector::HANDLE_CONTINUED
-
       rescue
-        Log.debug("Channel close #{io}")
+        Log.debug("Channel write failed #{io}")
         return Selector::HANDLE_FAILED
       end
 
       self.handle_write(offset)
 
+      if @write_buffer.length != 0
+        return Selector::HANDLE_CONTINUED
+      end
+      
       return Selector::HANDLE_FINISHED
     end
 
@@ -171,6 +162,14 @@ module Rakie
 
     def closed?
       @io.closed?
+    end
+
+    def self.recv_nonblock(io, size)
+      io.recv(size, Socket::MSG_DONTWAIT)
+    end
+
+    def self.send_nonblock(io, message)
+      io.send(message, Socket::MSG_NOSIGNAL | Socket::MSG_DONTWAIT)
     end
   end
 end

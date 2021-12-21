@@ -1,39 +1,57 @@
 
-Rakie::Loop.dispatch do
+Rakie::Scheduler.dispatch do
   puts '123'
 end
 
-class Client
-  attr_accessor :io
+module Rakie
+  class Client
+    attr_accessor :io
 
-  def initialize
-    @io = TCPSocket.new('127.0.0.1', 3001)
-  end
-
-  def on_read(io)
-    begin
-      data = io.recv_nonblock(100)
-
-      puts "Receive [#{data.length}] bytes: #{data}"
-
-    rescue Exception => e
-      Log.debug("Channel error #{io}: #{e}")
-      return Event::HANDLE_FAILED
+    def initialize
+      @io = TCPSocket.new('127.0.0.1', 3001)
     end
 
-    return Event::HANDLE_CONTINUED
-  end
+    def self.remote_closed?(io)
+      status = false
 
-  def on_write(io)
-    
-  end
+      io._setnonblock(true)
+      status = io.eof?
+      io._setnonblock(false)
 
-  def on_detach(io)
-    begin
-      io.close
+      return status
+    end
 
-    rescue Exception => e
-      p e
+    def on_read(io)
+      begin
+        data = io.recv_nonblock(100)
+
+        puts "Receive [#{data.length}] bytes: #{data}"
+
+        if data.length == 0
+          Log.debug("Channel #{io} closed by remote")
+          return Selector::HANDLE_FAILED if Client.remote_closed?(io)
+        end
+
+      rescue Exception => e
+        Log.debug("Channel error #{io}: #{e}")
+        return Selector::HANDLE_FAILED
+      end
+
+      return Selector::HANDLE_CONTINUED
+    end
+
+    def on_write(io)
+      
+    end
+
+    def on_detach(io)
+      begin
+        Log.debug("Channel #{io} close")
+        io.close
+
+      rescue Exception => e
+        p e
+      end
     end
   end
 end
@@ -43,9 +61,9 @@ c = Client.new
 
 Rakie::Selector.instance.push(c.io, c, Rakie::Selector::READ_EVENT)
 
-Rakie::Loop.run do
+Rakie::Scheduler.run do
   c = n.clone
 
-  Rakie::Loop.dispatch { puts "Start for #{c} times" }
+  Rakie::Scheduler.dispatch { puts "Start for #{c} times" }
   n += 1
 end

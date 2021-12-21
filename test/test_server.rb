@@ -1,5 +1,5 @@
 
-Rakie::Loop.dispatch do
+Rakie::Scheduler.dispatch do
   puts '123'
 end
 
@@ -9,20 +9,33 @@ module Rakie
 
     def initialize(io = nil)
       @io = io
+      @buffer = String.new
 
       Rakie::Selector.instance.push(@io, self, Rakie::Selector::READ_EVENT)
     end
 
+    def self.recv_nonblock(io, size)
+      io.recv(size, Socket::MSG_DONTWAIT)
+    end
+
+    def self.send_nonblock(io, message)
+      io.send(message, Socket::MSG_NOSIGNAL | Socket::MSG_DONTWAIT)
+    end
+
     def on_read(io)
       begin
-        if io.eof?
-          Log.debug("Channel #{io} closed by remote")
-          return Selector::HANDLE_FAILED
-        end
-
-        data = io.recv_nonblock(100)
+        data = Client.recv_nonblock(io, 100)
 
         puts "Receive [#{data.length}] bytes: #{data}"
+
+        @buffer << data
+
+        self.on_write(io)
+
+        if data.length == 0
+          Log.debug("Channel #{io} closed by remote")
+          return Selector::HANDLE_FAILED if io.eof?
+        end
 
       rescue Exception => e
         Log.debug("Channel error #{io}: #{e}")
@@ -33,7 +46,15 @@ module Rakie
     end
 
     def on_write(io)
-      
+      begin
+        len = Client.send_nonblock(io, @buffer)
+
+        @buffer = @buffer[len .. -1]
+
+      rescue
+        Log.debug("Channel close #{io}")
+        return Selector::HANDLE_FAILED
+      end
     end
 
     def on_detach(io)
@@ -105,9 +126,9 @@ s = Rakie::Server.new
 
 Rakie::Selector.instance.push(s.io, s, Rakie::Selector::READ_EVENT)
 
-Rakie::Loop.run do
+Rakie::Scheduler.run do
   c = n.clone
 
-  Rakie::Loop.dispatch { puts "Start for #{c} times" }
+  Rakie::Scheduler.dispatch { puts "Start for #{c} times" }
   n += 1
 end
