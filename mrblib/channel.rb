@@ -19,6 +19,8 @@ module Rakie
 
         @read_buffer << Channel.recv_nonblock(io, DEFAULT_BUFFER_SIZE)
 
+        Log.debug("Channel got data: #{@read_buffer}")
+
         if origin_len == @read_buffer.length
           Log.debug("Channel #{io} closed by remote")
           return Selector::HANDLE_FAILED if io.eof?
@@ -90,11 +92,11 @@ module Rakie
 
       self.handle_write(offset)
 
-      if @write_buffer.length != 0
-        return Selector::HANDLE_CONTINUED
+      if @write_buffer.length == 0
+        return Selector::HANDLE_FINISHED
       end
       
-      return Selector::HANDLE_FINISHED
+      return Selector::HANDLE_CONTINUED
     end
 
     def on_detach(io)

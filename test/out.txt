@@ -1,0 +1,4054 @@
+00004 NODE_SCOPE:
+00004   NODE_BEGIN:
+00004     NODE_MODULE:
+00059       :Rakie
+00059       body:
+00004         NODE_BEGIN:
+00005           NODE_CLASS:
+00058             :Scheduler
+00058             body:
+00005               NODE_BEGIN:
+00006                 NODE_ASGN:
+00006                   lhs:
+00006                     NODE_IVAR @instance
+00006                   rhs:
+00006                     NODE_NIL
+00008                 NODE_DEF:
+00008                   initialize
+00008                   local variables:
+00008                     &
+00009                   NODE_BEGIN:
+00009                     NODE_ASGN:
+00009                       lhs:
+00009                         NODE_IVAR @tasks
+00009                       rhs:
+00009                         NODE_ARRAY:
+00010                     NODE_ASGN:
+00010                       lhs:
+00010                         NODE_IVAR @wait
+00010                       rhs:
+00010                         NODE_ARRAY:
+00011                     NODE_ASGN:
+00011                       lhs:
+00011                         NODE_IVAR @selector
+00011                       rhs:
+00011                         NODE_CALL(.):
+00011                           NODE_COLON2:
+00011                             NODE_CONST Rakie
+00011                             ::Selector
+00011                           method='instance' (1236)
+00012                     NODE_ASGN:
+00012                       lhs:
+00012                         NODE_IVAR @started
+00012                       rhs:
+00012                         NODE_FALSE
+00015                 NODE_DEF:
+00015                   run
+00015                   local variables:
+00015                     main, &
+00015                   mandatory args:
+00015                     NODE_ARG main
+00015                 NODE_ARGS_TAIL:
+00016                   NODE_BEGIN:
+00016                     NODE_ASGN:
+00016                       lhs:
+00016                         NODE_IVAR @started
+00016                       rhs:
+00016                         NODE_TRUE
+00017                     NODE_CALL(.):
+00017                       NODE_IVAR @tasks
+00017                       method='<<' (45)
+00017                       args:
+00017                         NODE_LVAR main
+00019                     NODE_WHILE:
+00038                       cond:
+00019                         NODE_IVAR @started
+00038                       body:
+00020                         NODE_BEGIN:
+00020                           NODE_OP_ASGN:
+00020                             lhs:
+00020                               NODE_IVAR @tasks
+00020                             op='+' (5)
+00020                             NODE_IVAR @wait
+00021                           NODE_CALL(.):
+00021                             NODE_IVAR @wait
+00021                             method='clear' (377)
+00023                           NODE_CALL(.):
+00023                             NODE_IVAR @tasks
+00023                             method='each' (213)
+00031                             args:
+00031                             block:
+00023                               NODE_BLOCK:
+00023                                   mandatory args:
+00023                                     NODE_ARG task
+00023                                 NODE_ARGS_TAIL:
+00031                                 body:
+00024                                   NODE_BEGIN:
+00024                                     NODE_IF:
+00026                                       cond:
+00024                                         NODE_CALL(.):
+00024                                           NODE_LVAR task
+00024                                           method='alive?' (503)
+00026                                       then:
+00026                                       else:
+00025                                         NODE_BEGIN:
+00025                                           NODE_NEXT:
+00030                                     NODE_CALL(.):
+00030                                       NODE_LVAR task
+00030                                       method='resume' (560)
+00033                           NODE_CALL(.):
+00033                             NODE_IVAR @tasks
+00033                             method='select!' (690)
+00033                             args:
+00033                             block:
+00033                               NODE_BLOCK:
+00033                                   mandatory args:
+00033                                     NODE_ARG task
+00033                                 NODE_ARGS_TAIL:
+00033                                 body:
+00033                                   NODE_BEGIN:
+00033                                     NODE_CALL(.):
+00033                                       NODE_LVAR task
+00033                                       method='alive?' (503)
+00037                           NODE_CALL(.):
+00037                             NODE_COLON2:
+00037                               NODE_CONST Rakie
+00037                               ::Selector
+00037                             method='select' (566)
+00041                 NODE_DEF:
+00041                   dispatch
+00041                   local variables:
+00041                     task, &
+00041                   mandatory args:
+00041                     NODE_ARG task
+00041                 NODE_ARGS_TAIL:
+00042                   NODE_BEGIN:
+00042                     NODE_CALL(.):
+00042                       NODE_IVAR @wait
+00042                       method='<<' (45)
+00042                       args:
+00042                         NODE_LVAR task
+00045                 NODE_SDEF:
+00045                   NODE_SELF
+00045                   :instance
+00046                   NODE_BEGIN:
+00046                     NODE_OP_ASGN:
+00046                       lhs:
+00046                         NODE_IVAR @instance
+00046                       op='||' (81)
+00046                       NODE_CALL(.):
+00046                         NODE_CONST Scheduler
+00046                         method='new' (128)
+00049                 NODE_SDEF:
+00049                   NODE_SELF
+00049                   :dispatch
+00050                   NODE_BEGIN:
+00050                     NODE_ASGN:
+00050                       lhs:
+00050                         NODE_LVAR task
+00050                       rhs:
+00050                         NODE_CALL(.):
+00050                           NODE_CONST Fiber
+00050                           method='new' (128)
+00050                           args:
+00050                           block:
+00050                             NODE_BLOCK:
+00050                               body:
+00050                                 NODE_BEGIN:
+00050                                   NODE_YIELD:
+00051                     NODE_CALL(.):
+00051                       NODE_CALL(.):
+00051                         NODE_SELF
+00051                         method='instance' (1236)
+00051                       method='dispatch' (1238)
+00051                       args:
+00051                         NODE_LVAR task
+00054                 NODE_SDEF:
+00054                   NODE_SELF
+00054                   :run
+00055                   NODE_BEGIN:
+00055                     NODE_ASGN:
+00055                       lhs:
+00055                         NODE_LVAR main
+00055                       rhs:
+00055                         NODE_CALL(.):
+00055                           NODE_CONST Fiber
+00055                           method='new' (128)
+00055                           args:
+00055                           block:
+00055                             NODE_BLOCK:
+00055                               body:
+00055                                 NODE_BEGIN:
+00055                                   NODE_FCALL:
+00055                                     NODE_SELF
+00055                                     method='loop' (250)
+00055                                     args:
+00055                                     block:
+00055                                       NODE_BLOCK:
+00055                                         body:
+00055                                           NODE_BEGIN:
+00055                                             NODE_IF:
+00055                                               cond:
+00055                                                 NODE_FCALL:
+00055                                                   NODE_SELF
+00055                                                   method='block_given?' (1045)
+00055                                               then:
+00055                                                 NODE_YIELD:
+00055                                             NODE_CALL(.):
+00055                                               NODE_CONST Fiber
+00055                                               method='yield' (460)
+00056                     NODE_CALL(.):
+00056                       NODE_CALL(.):
+00056                         NODE_SELF
+00056                         method='instance' (1236)
+00056                       method='run' (324595712)
+00056                       args:
+00056                         NODE_LVAR main
+irep 0x13a609390 nregs=2 nlocals=1 pools=0 syms=1 reps=1 iseq=11
+file: test_channel.rb
+    4 000 OP_LOADNIL	R1		
+    4 002 OP_MODULE	R1	:Rakie
+    4 005 OP_EXEC	R1	I(0:0x13a60ba40)
+    4 008 OP_RETURN	R1		
+    4 010 OP_STOP
+
+irep 0x13a60ba40 nregs=3 nlocals=1 pools=0 syms=1 reps=1 iseq=12
+file: test_channel.rb
+    5 000 OP_LOADNIL	R1		
+    5 002 OP_LOADNIL	R2		
+    5 004 OP_CLASS	R1	:Scheduler
+    5 007 OP_EXEC	R1	I(0:0x13a60bae0)
+    5 010 OP_RETURN	R1		
+
+irep 0x13a60bae0 nregs=3 nlocals=1 pools=0 syms=5 reps=6 iseq=64
+file: test_channel.rb
+    6 000 OP_LOADNIL	R1		
+    6 002 OP_SETIV	@instance	R1
+    8 005 OP_TCLASS	R1		
+    8 007 OP_METHOD	R2	I(0:0x13a6072f0)
+    8 010 OP_DEF	R1	:initialize
+   15 013 OP_TCLASS	R1		
+   15 015 OP_METHOD	R2	I(1:0x13a607830)
+   15 018 OP_DEF	R1	:run
+   41 021 OP_TCLASS	R1		
+   41 023 OP_METHOD	R2	I(2:0x13a60eb00)
+   41 026 OP_DEF	R1	:dispatch
+   45 029 OP_LOADSELF	R1		
+   45 031 OP_SCLASS	R1	
+   45 033 OP_METHOD	R2	I(3:0x13a608d90)
+   45 036 OP_DEF	R1	:instance
+   49 039 OP_LOADSELF	R1		
+   49 041 OP_SCLASS	R1	
+   49 043 OP_METHOD	R2	I(4:0x13a60e380)
+   49 046 OP_DEF	R1	:dispatch
+   54 049 OP_LOADSELF	R1		
+   54 051 OP_SCLASS	R1	
+   54 053 OP_METHOD	R2	I(5:0x13a610340)
+   54 056 OP_DEF	R1	:run
+   54 059 OP_LOADSYM	R1	:run	
+   54 062 OP_RETURN	R1		
+
+irep 0x13a6072f0 nregs=4 nlocals=2 pools=0 syms=7 reps=0 iseq=36
+local variable names:
+  R1:&
+file: test_channel.rb
+    8 000 OP_ENTER	0:0:0:0:0:0:0
+    9 004 OP_ARRAY	R2	0	
+    9 007 OP_SETIV	@tasks	R2
+   10 010 OP_ARRAY	R2	0	
+   10 013 OP_SETIV	@wait	R2
+   11 016 OP_GETCONST	R2	:Rakie
+   11 019 OP_GETMCNST	R2	R2::Selector
+   11 022 OP_SEND	R2	:instance	0
+   11 026 OP_SETIV	@selector	R2
+   12 029 OP_LOADF	R2		
+   12 031 OP_SETIV	@started	R2
+   12 034 OP_RETURN	R2		
+
+irep 0x13a607830 nregs=6 nlocals=3 pools=0 syms=10 reps=2 iseq=81
+local variable names:
+  R1:main
+  R2:&
+file: test_channel.rb
+   15 000 OP_ENTER	1:0:0:0:0:0:0
+   16 004 OP_LOADT	R3		
+   16 006 OP_SETIV	@started	R3
+   17 009 OP_GETIV	R3	@tasks
+   17 012 OP_MOVE	R4	R1		; R1:main
+   17 015 OP_SEND	R3	:<<	1
+   19 019 OP_JMP		070
+   20 022 OP_GETIV	R3	@tasks
+   20 025 OP_GETIV	R4	@wait
+   20 028 OP_ADD	R3	R4
+   20 030 OP_SETIV	@tasks	R3
+   21 033 OP_GETIV	R3	@wait
+   21 036 OP_SEND	R3	:clear	0
+   23 040 OP_GETIV	R3	@tasks
+   23 043 OP_BLOCK	R4	I(0:0x13a608220)
+   23 046 OP_SENDB	R3	:each	0
+   33 050 OP_GETIV	R3	@tasks
+   33 053 OP_BLOCK	R4	I(1:0x13a608ed0)
+   33 056 OP_SENDB	R3	:select!	0
+   37 060 OP_GETCONST	R3	:Rakie
+   37 063 OP_GETMCNST	R3	R3::Selector
+   37 066 OP_SEND	R3	:select	0
+   19 070 OP_GETIV	R3	@started
+   19 073 OP_JMPIF	R3	022	
+   19 077 OP_LOADNIL	R3		
+   19 079 OP_RETURN	R3		
+
+irep 0x13a608220 nregs=5 nlocals=3 pools=0 syms=2 reps=0 iseq=28
+local variable names:
+  R1:task
+  R2:&
+file: test_channel.rb
+   23 000 OP_ENTER	1:0:0:0:0:0:0
+   24 004 OP_MOVE	R3	R1		; R1:task
+   24 007 OP_SEND	R3	:alive?	0
+   24 011 OP_JMPIF	R3	019	
+   25 015 OP_LOADNIL	R3		
+   25 017 OP_RETURN	R3		
+   30 019 OP_MOVE	R3	R1		; R1:task
+   30 022 OP_SEND	R3	:resume	0
+   30 026 OP_RETURN	R3		
+
+irep 0x13a608ed0 nregs=5 nlocals=3 pools=0 syms=1 reps=0 iseq=13
+local variable names:
+  R1:task
+  R2:&
+file: test_channel.rb
+   33 000 OP_ENTER	1:0:0:0:0:0:0
+   33 004 OP_MOVE	R3	R1		; R1:task
+   33 007 OP_SEND	R3	:alive?	0
+   33 011 OP_RETURN	R3		
+
+irep 0x13a60eb00 nregs=6 nlocals=3 pools=0 syms=2 reps=0 iseq=16
+local variable names:
+  R1:task
+  R2:&
+file: test_channel.rb
+   41 000 OP_ENTER	1:0:0:0:0:0:0
+   42 004 OP_GETIV	R3	@wait
+   42 007 OP_MOVE	R4	R1		; R1:task
+   42 010 OP_SEND	R3	:<<	1
+   42 014 OP_RETURN	R3		
+
+irep 0x13a608d90 nregs=4 nlocals=2 pools=0 syms=3 reps=0 iseq=23
+local variable names:
+  R1:&
+file: test_channel.rb
+   45 000 OP_ENTER	0:0:0:0:0:0:0
+   46 004 OP_GETIV	R2	@instance
+   46 007 OP_JMPIF	R2	021	
+   46 011 OP_GETCONST	R2	:Scheduler
+   46 014 OP_SEND	R2	:new	0
+   46 018 OP_SETIV	@instance	R2
+   46 021 OP_RETURN	R2		
+
+irep 0x13a60e380 nregs=6 nlocals=3 pools=0 syms=4 reps=1 iseq=32
+local variable names:
+  R1:&
+  R2:task
+file: test_channel.rb
+   49 000 OP_ENTER	0:0:0:0:0:0:0
+   50 004 OP_GETCONST	R3	:Fiber
+   50 007 OP_BLOCK	R4	I(0:0x13a610500)
+   50 010 OP_SENDB	R3	:new	0
+   50 014 OP_MOVE	R2	R3		; R2:task
+   51 017 OP_LOADSELF	R3		
+   51 019 OP_SEND	R3	:instance	0
+   51 023 OP_MOVE	R4	R2		; R2:task
+   51 026 OP_SEND	R3	:dispatch	1
+   51 030 OP_RETURN	R3		
+
+irep 0x13a610500 nregs=4 nlocals=2 pools=0 syms=1 reps=0 iseq=14
+local variable names:
+  R1:&
+file: test_channel.rb
+   50 000 OP_ENTER	0:0:0:0:0:0:0
+   50 004 OP_BLKPUSH	R2	0:0:0:0 (1)
+   50 008 OP_SEND	R2	:call	0
+   50 012 OP_RETURN	R2		
+
+irep 0x13a610340 nregs=6 nlocals=3 pools=0 syms=4 reps=1 iseq=32
+local variable names:
+  R1:&
+  R2:main
+file: test_channel.rb
+   54 000 OP_ENTER	0:0:0:0:0:0:0
+   55 004 OP_GETCONST	R3	:Fiber
+   55 007 OP_BLOCK	R4	I(0:0x13a6107f0)
+   55 010 OP_SENDB	R3	:new	0
+   55 014 OP_MOVE	R2	R3		; R2:main
+   56 017 OP_LOADSELF	R3		
+   56 019 OP_SEND	R3	:instance	0
+   56 023 OP_MOVE	R4	R2		; R2:main
+   56 026 OP_SEND	R3	:run	1
+   56 030 OP_RETURN	R3		
+
+irep 0x13a6107f0 nregs=4 nlocals=2 pools=0 syms=1 reps=1 iseq=15
+local variable names:
+  R1:&
+file: test_channel.rb
+   55 000 OP_ENTER	0:0:0:0:0:0:0
+   55 004 OP_LOADSELF	R2		
+   55 006 OP_BLOCK	R3	I(0:0x13a610430)
+   55 009 OP_SENDB	R2	:loop	0
+   55 013 OP_RETURN	R2		
+
+irep 0x13a610430 nregs=4 nlocals=2 pools=0 syms=4 reps=0 iseq=31
+local variable names:
+  R1:&
+file: test_channel.rb
+   55 000 OP_ENTER	0:0:0:0:0:0:0
+   55 004 OP_LOADSELF	R2		
+   55 006 OP_SEND	R2	:block_given?	0
+   55 010 OP_JMPNOT	R2	022	
+   55 014 OP_BLKPUSH	R2	0:0:0:0 (2)
+   55 018 OP_SEND	R2	:call	0
+   55 022 OP_GETCONST	R2	:Fiber
+   55 025 OP_SEND	R2	:yield	0
+   55 029 OP_RETURN	R2		
+
+00001 NODE_SCOPE:
+00001   NODE_BEGIN:
+00001     NODE_MODULE:
+00168       :Rakie
+00168       body:
+00001         NODE_BEGIN:
+00002           NODE_CLASS:
+00167             :Selector
+00167             body:
+00002               NODE_BEGIN:
+00003                 NODE_ASGN:
+00003                   lhs:
+00003                     NODE_IVAR @instance
+00003                   rhs:
+00003                     NODE_NIL
+00005                 NODE_ASGN:
+00005                   lhs:
+00005                     NODE_CONST READ_EVENT
+00005                   rhs:
+00005                     NODE_INT 1 base 10
+00006                 NODE_ASGN:
+00006                   lhs:
+00006                     NODE_CONST WRITE_EVENT
+00006                   rhs:
+00006                     NODE_INT 2 base 10
+00008                 NODE_ASGN:
+00008                   lhs:
+00008                     NODE_CONST HANDLE_FAILED
+00008                   rhs:
+00008                     NODE_NEGATE:
+00008                       NODE_INT 1 base 10
+00009                 NODE_ASGN:
+00009                   lhs:
+00009                     NODE_CONST HANDLE_CONTINUED
+00009                   rhs:
+00009                     NODE_INT 0 base 10
+00010                 NODE_ASGN:
+00010                   lhs:
+00010                     NODE_CONST HANDLE_FINISHED
+00010                   rhs:
+00010                     NODE_INT 1 base 10
+00012                 NODE_ASGN:
+00012                   lhs:
+00012                     NODE_CONST OPERATION_ADD
+00012                   rhs:
+00012                     NODE_INT 0 base 10
+00013                 NODE_ASGN:
+00013                   lhs:
+00013                     NODE_CONST OPERATION_MODIFY
+00013                   rhs:
+00013                     NODE_INT 1 base 10
+00014                 NODE_ASGN:
+00014                   lhs:
+00014                     NODE_CONST OPERATION_DELETE
+00014                   rhs:
+00014                     NODE_INT 2 base 10
+00016                 NODE_DEF:
+00016                   initialize
+00016                   local variables:
+00016                     &
+00017                   NODE_BEGIN:
+00017                     NODE_ASGN:
+00017                       lhs:
+00017                         NODE_IVAR @wait_ios
+00017                       rhs:
+00017                         NODE_ARRAY:
+00018                     NODE_MASGN:
+00018                       mlhs:
+00018                         pre:
+00018                           NODE_IVAR @signal_in
+00018                           NODE_IVAR @signal_out
+00018                       rhs:
+00018                         NODE_CALL(.):
+00018                           NODE_CONST IO
+00018                           method='pipe' (273)
+00021                     NODE_ASGN:
+00021                       lhs:
+00019                         NODE_IVAR @ios
+00021                       rhs:
+00020                         NODE_HASH:
+00020                           key:
+00020                             NODE_IVAR @signal_in
+00020                           value:
+00020                             NODE_CONST READ_EVENT
+00022                     NODE_ASGN:
+00022                       lhs:
+00022                         NODE_IVAR @handlers
+00022                       rhs:
+00022                         NODE_HASH:
+00025                 NODE_DEF:
+00025                   process_signal
+00025                   local variables:
+00025                     io, &, signal, operation, new_io, new_handler, new_event, handler
+00025                   mandatory args:
+00025                     NODE_ARG io
+00025                 NODE_ARGS_TAIL:
+00026                   NODE_BEGIN:
+00026                     NODE_ASGN:
+00026                       lhs:
+00026                         NODE_LVAR signal
+00026                       rhs:
+00026                         NODE_CALL(.):
+00026                           NODE_LVAR io
+00026                           method='read' (283)
+00026                           args:
+00026                             NODE_INT 1 base 10
+00028                     NODE_IF:
+00030                       cond:
+00028                         NODE_CALL(.):
+00028                           NODE_LVAR signal
+00028                           method='==' (47)
+00028                           args:
+00028                             NODE_STR "q" len 1
+00030                       then:
+00029                         NODE_BEGIN:
+00029                           NODE_RETURN:
+00029                             NODE_INT 1 base 10
+00032                     NODE_MASGN:
+00032                       mlhs:
+00032                         pre:
+00032                           NODE_LVAR operation
+00032                           NODE_LVAR new_io
+00032                           NODE_LVAR new_handler
+00032                           NODE_LVAR new_event
+00032                       rhs:
+00032                         NODE_CALL(.):
+00032                           NODE_IVAR @wait_ios
+00032                           method='shift' (435)
+00033                     NODE_IF:
+00035                       cond:
+00033                         NODE_CALL(.):
+00033                           NODE_LVAR new_io
+00033                           method='closed?' (632)
+00035                       then:
+00034                         NODE_BEGIN:
+00034                           NODE_RETURN:
+00034                             NODE_INT 0 base 10
+00037                     NODE_CALL(.):
+00037                       NODE_CONST Log
+00037                       method='debug' (85472648)
+00037                       args:
+00037                         NODE_DSTR:
+00037                           NODE_STR "Event handling " len 15
+00037                           NODE_BEGIN:
+00037                             NODE_LVAR signal
+00037                           NODE_STR " with " len 6
+00037                           NODE_BEGIN:
+00037                             NODE_CALL(.):
+00037                               NODE_LVAR new_io
+00037                               method='fileno' (521)
+00037                           NODE_STR " to " len 4
+00037                           NODE_BEGIN:
+00037                             NODE_LVAR new_event
+00037                           NODE_STR "" len 0
+00039                     NODE_IF:
+00060                       cond:
+00039                         NODE_CALL(.):
+00039                           NODE_LVAR operation
+00039                           method='==' (47)
+00039                           args:
+00039                             NODE_CONST OPERATION_ADD
+00060                       then:
+00040                         NODE_BEGIN:
+00040                           NODE_ASGN:
+00040                             lhs:
+00040                               NODE_CALL(.):
+00040                                 NODE_IVAR @ios
+00040                                 method='[]' (54)
+00040                                 args:
+00040                                   NODE_LVAR new_io
+00040                             rhs:
+00040                               NODE_LVAR new_event
+00041                           NODE_ASGN:
+00041                             lhs:
+00041                               NODE_CALL(.):
+00041                                 NODE_IVAR @handlers
+00041                                 method='[]' (54)
+00041                                 args:
+00041                                   NODE_LVAR new_io
+00041                             rhs:
+00041                               NODE_LVAR new_handler
+00042                           NODE_CALL(.):
+00042                             NODE_CONST Log
+00042                             method='debug' (85472648)
+00042                             args:
+00042                               NODE_DSTR:
+00042                                 NODE_STR "Event add all " len 14
+00042                                 NODE_BEGIN:
+00042                                   NODE_CALL(.):
+00042                                     NODE_LVAR new_io
+00042                                     method='fileno' (521)
+00042                                 NODE_STR " to " len 4
+00042                                 NODE_BEGIN:
+00042                                   NODE_LVAR new_event
+00042                                 NODE_STR "" len 0
+00060                       else:
+00060                         NODE_IF:
+00060                           cond:
+00044                             NODE_CALL(.):
+00044                               NODE_LVAR operation
+00044                               method='==' (47)
+00044                               args:
+00044                                 NODE_CONST OPERATION_DELETE
+00060                           then:
+00045                             NODE_BEGIN:
+00045                               NODE_ASGN:
+00045                                 lhs:
+00045                                   NODE_LVAR handler
+00045                                 rhs:
+00045                                   NODE_CALL(.):
+00045                                     NODE_IVAR @handlers
+00045                                     method='[]' (54)
+00045                                     args:
+00045                                       NODE_LVAR new_io
+00047                               NODE_IF:
+00050                                 cond:
+00047                                   NODE_CALL(.):
+00047                                     NODE_LVAR handler
+00047                                     method='!=' (37)
+00047                                     args:
+00047                                       NODE_NIL
+00050                                 then:
+00048                                   NODE_BEGIN:
+00048                                     NODE_CALL(.):
+00048                                       NODE_CONST Log
+00048                                       method='debug' (85472648)
+00048                                       args:
+00048                                         NODE_DSTR:
+00048                                           NODE_STR "Event close " len 12
+00048                                           NODE_BEGIN:
+00048                                             NODE_LVAR new_io
+00048                                           NODE_STR "" len 0
+00049                                     NODE_CALL(.):
+00049                                       NODE_LVAR handler
+00049                                       method='on_detach' (1259)
+00049                                       args:
+00049                                         NODE_LVAR new_io
+00052                               NODE_CALL(.):
+00052                                 NODE_IVAR @ios
+00052                                 method='delete' (509)
+00052                                 args:
+00052                                   NODE_LVAR new_io
+00053                               NODE_CALL(.):
+00053                                 NODE_IVAR @handlers
+00053                                 method='delete' (509)
+00053                                 args:
+00053                                   NODE_LVAR new_io
+00054                               NODE_CALL(.):
+00054                                 NODE_CONST Log
+00054                                 method='debug' (85472648)
+00054                                 args:
+00054                                   NODE_DSTR:
+00054                                     NODE_STR "Event remove all " len 17
+00054                                     NODE_BEGIN:
+00054                                       NODE_LVAR new_io
+00054                                     NODE_STR "" len 0
+00060                           else:
+00060                             NODE_IF:
+00060                               cond:
+00056                                 NODE_CALL(.):
+00056                                   NODE_LVAR operation
+00056                                   method='==' (47)
+00056                                   args:
+00056                                     NODE_CONST OPERATION_MODIFY
+00060                               then:
+00057                                 NODE_BEGIN:
+00057                                   NODE_ASGN:
+00057                                     lhs:
+00057                                       NODE_CALL(.):
+00057                                         NODE_IVAR @ios
+00057                                         method='[]' (54)
+00057                                         args:
+00057                                           NODE_LVAR new_io
+00057                                     rhs:
+00057                                       NODE_LVAR new_event
+00058                                   NODE_ASGN:
+00058                                     lhs:
+00058                                       NODE_CALL(.):
+00058                                         NODE_IVAR @handlers
+00058                                         method='[]' (54)
+00058                                         args:
+00058                                           NODE_LVAR new_io
+00058                                     rhs:
+00058                                       NODE_LVAR new_handler
+00059                                   NODE_CALL(.):
+00059                                     NODE_CONST Log
+00059                                     method='debug' (85472648)
+00059                                     args:
+00059                                       NODE_DSTR:
+00059                                         NODE_STR "Event modify all " len 17
+00059                                         NODE_BEGIN:
+00059                                           NODE_CALL(.):
+00059                                             NODE_LVAR new_io
+00059                                             method='fileno' (521)
+00059                                         NODE_STR " to " len 4
+00059                                         NODE_BEGIN:
+00059                                           NODE_LVAR new_event
+00059                                         NODE_STR "" len 0
+00062                     NODE_RETURN:
+00062                       NODE_INT 0 base 10
+00065                 NODE_DEF:
+00065                   run
+00065                   local variables:
+00065                     &, read_ios, write_ios, read_ready, write_ready
+00066                   NODE_BEGIN:
+00066                     NODE_ASGN:
+00066                       lhs:
+00066                         NODE_LVAR read_ios
+00066                       rhs:
+00066                         NODE_CALL(.):
+00066                           NODE_IVAR @ios
+00066                           method='select' (566)
+00066                           args:
+00066                           block:
+00066                             NODE_BLOCK:
+00066                                 mandatory args:
+00066                                   NODE_ARG k
+00066                                   NODE_ARG v
+00066                               NODE_ARGS_TAIL:
+00066                               body:
+00066                                 NODE_BEGIN:
+00066                                   NODE_CALL(.):
+00066                                     NODE_CALL(.):
+00066                                       NODE_LVAR v
+00066                                       method='&' (3)
+00066                                       args:
+00066                                         NODE_CONST READ_EVENT
+00066                                     method='>' (9)
+00066                                     args:
+00066                                       NODE_INT 0 base 10
+00067                     NODE_ASGN:
+00067                       lhs:
+00067                         NODE_LVAR write_ios
+00067                       rhs:
+00067                         NODE_CALL(.):
+00067                           NODE_IVAR @ios
+00067                           method='select' (566)
+00067                           args:
+00067                           block:
+00067                             NODE_BLOCK:
+00067                                 mandatory args:
+00067                                   NODE_ARG k
+00067                                   NODE_ARG v
+00067                               NODE_ARGS_TAIL:
+00067                               body:
+00067                                 NODE_BEGIN:
+00067                                   NODE_CALL(.):
+00067                                     NODE_CALL(.):
+00067                                       NODE_LVAR v
+00067                                       method='&' (3)
+00067                                       args:
+00067                                         NODE_CONST WRITE_EVENT
+00067                                     method='>' (9)
+00067                                     args:
+00067                                       NODE_INT 0 base 10
+00069                     NODE_CALL(.):
+00069                       NODE_CONST Log
+00069                       method='debug' (85472648)
+00069                       args:
+00069                         NODE_STR "Event selecting ..." len 19
+00070                     NODE_MASGN:
+00070                       mlhs:
+00070                         pre:
+00070                           NODE_LVAR read_ready
+00070                           NODE_LVAR write_ready
+00070                       rhs:
+00070                         NODE_CALL(.):
+00070                           NODE_CONST IO
+00070                           method='select' (566)
+00070                           args:
+00070                             NODE_CALL(.):
+00070                               NODE_LVAR read_ios
+00070                               method='keys' (242)
+00070                             NODE_CALL(.):
+00070                               NODE_LVAR write_ios
+00070                               method='keys' (242)
+00070                             NODE_ARRAY:
+00070                             NODE_INT 1 base 10
+00072                     NODE_IF:
+00105                       cond:
+00072                         NODE_CALL(.):
+00072                           NODE_LVAR read_ready
+00072                           method='!=' (37)
+00072                           args:
+00072                             NODE_NIL
+00105                       then:
+00073                         NODE_BEGIN:
+00073                           NODE_CALL(.):
+00073                             NODE_LVAR read_ready
+00073                             method='each' (213)
+00104                             args:
+00104                             block:
+00073                               NODE_BLOCK:
+00073                                   mandatory args:
+00073                                     NODE_ARG io
+00073                                 NODE_ARGS_TAIL:
+00104                                 body:
+00074                                   NODE_BEGIN:
+00074                                     NODE_CALL(.):
+00074                                       NODE_CONST Log
+00074                                       method='debug' (85472648)
+00074                                       args:
+00074                                         NODE_STR "Event selecting ..." len 19
+00076                                     NODE_IF:
+00082                                       cond:
+00076                                         NODE_CALL(.):
+00076                                           NODE_LVAR io
+00076                                           method='==' (47)
+00076                                           args:
+00076                                             NODE_IVAR @signal_in
+00082                                       then:
+00077                                         NODE_BEGIN:
+00077                                           NODE_IF:
+00079                                             cond:
+00077                                               NODE_CALL(.):
+00077                                                 NODE_CALL(.):
+00077                                                   NODE_SELF
+00077                                                   method='process_signal' (1252)
+00077                                                   args:
+00077                                                     NODE_LVAR io
+00077                                                 method='!=' (37)
+00077                                                 args:
+00077                                                   NODE_INT 0 base 10
+00079                                             then:
+00078                                               NODE_BEGIN:
+00078                                                 NODE_RETURN:
+00081                                           NODE_NEXT:
+00084                                     NODE_ASGN:
+00084                                       lhs:
+00084                                         NODE_LVAR handler
+00084                                       rhs:
+00084                                         NODE_CALL(.):
+00084                                           NODE_IVAR @handlers
+00084                                           method='[]' (54)
+00084                                           args:
+00084                                             NODE_LVAR io
+00086                                     NODE_IF:
+00088                                       cond:
+00086                                         NODE_CALL(.):
+00086                                           NODE_LVAR handler
+00086                                           method='==' (47)
+00086                                           args:
+00086                                             NODE_NIL
+00088                                       then:
+00087                                         NODE_BEGIN:
+00087                                           NODE_NEXT:
+00090                                     NODE_ASGN:
+00090                                       lhs:
+00090                                         NODE_LVAR result
+00090                                       rhs:
+00090                                         NODE_CALL(.):
+00090                                           NODE_LVAR handler
+00090                                           method='on_read' (1264)
+00090                                           args:
+00090                                             NODE_LVAR io
+00092                                     NODE_IF:
+00103                                       cond:
+00092                                         NODE_CALL(.):
+00092                                           NODE_LVAR result
+00092                                           method='==' (47)
+00092                                           args:
+00092                                             NODE_CONST HANDLE_FINISHED
+00103                                       then:
+00093                                         NODE_BEGIN:
+00093                                           NODE_OP_ASGN:
+00093                                             lhs:
+00093                                               NODE_CALL(.):
+00093                                                 NODE_IVAR @ios
+00093                                                 method='[]' (54)
+00093                                                 args:
+00093                                                   NODE_LVAR io
+00093                                             op='&' (3)
+00093                                             NODE_CALL(.):
+00093                                               NODE_CONST READ_EVENT
+00093                                               method='~' (36)
+00094                                           NODE_CALL(.):
+00094                                             NODE_CONST Log
+00094                                             method='debug' (85472648)
+00094                                             args:
+00094                                               NODE_DSTR:
+00094                                                 NODE_STR "Event remove read " len 18
+00094                                                 NODE_BEGIN:
+00094                                                   NODE_LVAR io
+00094                                                 NODE_STR "" len 0
+00103                                       else:
+00103                                         NODE_IF:
+00103                                           cond:
+00096                                             NODE_CALL(.):
+00096                                               NODE_LVAR result
+00096                                               method='==' (47)
+00096                                               args:
+00096                                                 NODE_CONST HANDLE_FAILED
+00103                                           then:
+00097                                             NODE_BEGIN:
+00097                                               NODE_CALL(.):
+00097                                                 NODE_LVAR handler
+00097                                                 method='on_detach' (1259)
+00097                                                 args:
+00097                                                   NODE_LVAR io
+00098                                               NODE_CALL(.):
+00098                                                 NODE_CONST Log
+00098                                                 method='debug' (85472648)
+00098                                                 args:
+00098                                                   NODE_DSTR:
+00098                                                     NODE_STR "Event close " len 12
+00098                                                     NODE_BEGIN:
+00098                                                       NODE_LVAR io
+00098                                                     NODE_STR "" len 0
+00100                                               NODE_CALL(.):
+00100                                                 NODE_IVAR @ios
+00100                                                 method='delete' (509)
+00100                                                 args:
+00100                                                   NODE_LVAR io
+00101                                               NODE_CALL(.):
+00101                                                 NODE_IVAR @handlers
+00101                                                 method='delete' (509)
+00101                                                 args:
+00101                                                   NODE_LVAR io
+00102                                               NODE_CALL(.):
+00102                                                 NODE_CONST Log
+00102                                                 method='debug' (85472648)
+00102                                                 args:
+00102                                                   NODE_DSTR:
+00102                                                     NODE_STR "Event remove all " len 17
+00102                                                     NODE_BEGIN:
+00102                                                       NODE_LVAR io
+00102                                                     NODE_STR "" len 0
+00107                     NODE_IF:
+00130                       cond:
+00107                         NODE_CALL(.):
+00107                           NODE_LVAR write_ready
+00107                           method='!=' (37)
+00107                           args:
+00107                             NODE_NIL
+00130                       then:
+00108                         NODE_BEGIN:
+00108                           NODE_CALL(.):
+00108                             NODE_LVAR write_ready
+00108                             method='each' (213)
+00129                             args:
+00129                             block:
+00108                               NODE_BLOCK:
+00108                                   mandatory args:
+00108                                     NODE_ARG io
+00108                                 NODE_ARGS_TAIL:
+00129                                 body:
+00109                                   NODE_BEGIN:
+00109                                     NODE_ASGN:
+00109                                       lhs:
+00109                                         NODE_LVAR handler
+00109                                       rhs:
+00109                                         NODE_CALL(.):
+00109                                           NODE_IVAR @handlers
+00109                                           method='[]' (54)
+00109                                           args:
+00109                                             NODE_LVAR io
+00111                                     NODE_IF:
+00113                                       cond:
+00111                                         NODE_CALL(.):
+00111                                           NODE_LVAR handler
+00111                                           method='==' (47)
+00111                                           args:
+00111                                             NODE_NIL
+00113                                       then:
+00112                                         NODE_BEGIN:
+00112                                           NODE_NEXT:
+00115                                     NODE_ASGN:
+00115                                       lhs:
+00115                                         NODE_LVAR result
+00115                                       rhs:
+00115                                         NODE_CALL(.):
+00115                                           NODE_LVAR handler
+00115                                           method='on_write' (1265)
+00115                                           args:
+00115                                             NODE_LVAR io
+00117                                     NODE_IF:
+00128                                       cond:
+00117                                         NODE_CALL(.):
+00117                                           NODE_LVAR result
+00117                                           method='==' (47)
+00117                                           args:
+00117                                             NODE_CONST HANDLE_FINISHED
+00128                                       then:
+00118                                         NODE_BEGIN:
+00118                                           NODE_OP_ASGN:
+00118                                             lhs:
+00118                                               NODE_CALL(.):
+00118                                                 NODE_IVAR @ios
+00118                                                 method='[]' (54)
+00118                                                 args:
+00118                                                   NODE_LVAR io
+00118                                             op='&' (3)
+00118                                             NODE_CALL(.):
+00118                                               NODE_CONST WRITE_EVENT
+00118                                               method='~' (36)
+00119                                           NODE_CALL(.):
+00119                                             NODE_CONST Log
+00119                                             method='debug' (85472648)
+00119                                             args:
+00119                                               NODE_DSTR:
+00119                                                 NODE_STR "Event remove write " len 19
+00119                                                 NODE_BEGIN:
+00119                                                   NODE_LVAR io
+00119                                                 NODE_STR "" len 0
+00128                                       else:
+00128                                         NODE_IF:
+00128                                           cond:
+00121                                             NODE_CALL(.):
+00121                                               NODE_LVAR result
+00121                                               method='==' (47)
+00121                                               args:
+00121                                                 NODE_CONST HANDLE_FAILED
+00128                                           then:
+00122                                             NODE_BEGIN:
+00122                                               NODE_CALL(.):
+00122                                                 NODE_LVAR handler
+00122                                                 method='on_detach' (1259)
+00122                                                 args:
+00122                                                   NODE_LVAR io
+00123                                               NODE_CALL(.):
+00123                                                 NODE_CONST Log
+00123                                                 method='debug' (85472648)
+00123                                                 args:
+00123                                                   NODE_DSTR:
+00123                                                     NODE_STR "Event close " len 12
+00123                                                     NODE_BEGIN:
+00123                                                       NODE_LVAR io
+00123                                                     NODE_STR "" len 0
+00125                                               NODE_CALL(.):
+00125                                                 NODE_IVAR @ios
+00125                                                 method='delete' (509)
+00125                                                 args:
+00125                                                   NODE_LVAR io
+00126                                               NODE_CALL(.):
+00126                                                 NODE_IVAR @handlers
+00126                                                 method='delete' (509)
+00126                                                 args:
+00126                                                   NODE_LVAR io
+00127                                               NODE_CALL(.):
+00127                                                 NODE_CONST Log
+00127                                                 method='debug' (85472648)
+00127                                                 args:
+00127                                                   NODE_DSTR:
+00127                                                     NODE_STR "Event remove all " len 17
+00127                                                     NODE_BEGIN:
+00127                                                       NODE_LVAR io
+00127                                                     NODE_STR "" len 0
+00133                 NODE_DEF:
+00133                   push
+00133                   local variables:
+00133                     io, handler, event, &
+00133                   mandatory args:
+00133                     NODE_ARG io
+00133                     NODE_ARG handler
+00133                     NODE_ARG event
+00133                 NODE_ARGS_TAIL:
+00134                   NODE_BEGIN:
+00134                     NODE_CALL(.):
+00134                       NODE_IVAR @wait_ios
+00134                       method='push' (280)
+00134                       args:
+00134                         NODE_ARRAY:
+00134                           NODE_CONST OPERATION_ADD
+00134                           NODE_LVAR io
+00134                           NODE_LVAR handler
+00134                           NODE_LVAR event
+00135                     NODE_CALL(.):
+00135                       NODE_IVAR @signal_out
+00135                       method='write' (459)
+00135                       args:
+00135                         NODE_STR "a" len 1
+00138                 NODE_DEF:
+00138                   delete
+00138                   local variables:
+00138                     io, &
+00138                   mandatory args:
+00138                     NODE_ARG io
+00138                 NODE_ARGS_TAIL:
+00139                   NODE_BEGIN:
+00139                     NODE_CALL(.):
+00139                       NODE_IVAR @wait_ios
+00139                       method='push' (280)
+00139                       args:
+00139                         NODE_ARRAY:
+00139                           NODE_CONST OPERATION_DELETE
+00139                           NODE_LVAR io
+00139                           NODE_NIL
+00139                           NODE_NIL
+00140                     NODE_CALL(.):
+00140                       NODE_IVAR @signal_out
+00140                       method='write' (459)
+00140                       args:
+00140                         NODE_STR "a" len 1
+00143                 NODE_DEF:
+00143                   modify
+00143                   local variables:
+00143                     io, handler, event, &
+00143                   mandatory args:
+00143                     NODE_ARG io
+00143                     NODE_ARG handler
+00143                     NODE_ARG event
+00143                 NODE_ARGS_TAIL:
+00144                   NODE_BEGIN:
+00144                     NODE_CALL(.):
+00144                       NODE_IVAR @wait_ios
+00144                       method='push' (280)
+00144                       args:
+00144                         NODE_ARRAY:
+00144                           NODE_CONST OPERATION_MODIFY
+00144                           NODE_LVAR io
+00144                           NODE_LVAR handler
+00144                           NODE_LVAR event
+00145                     NODE_CALL(.):
+00145                       NODE_IVAR @signal_out
+00145                       method='write' (459)
+00145                       args:
+00145                         NODE_STR "a" len 1
+00148                 NODE_SDEF:
+00148                   NODE_SELF
+00148                   :instance
+00149                   NODE_BEGIN:
+00149                     NODE_OP_ASGN:
+00149                       lhs:
+00149                         NODE_IVAR @instance
+00149                       op='||' (81)
+00149                       NODE_CALL(.):
+00149                         NODE_CONST Selector
+00149                         method='new' (128)
+00152                 NODE_SDEF:
+00152                   NODE_SELF
+00152                   :push
+00152                     mandatory args:
+00152                       NODE_ARG io
+00152                       NODE_ARG listener
+00152                       NODE_ARG type
+00152                   NODE_ARGS_TAIL:
+00153                   NODE_BEGIN:
+00153                     NODE_CALL(.):
+00153                       NODE_CALL(.):
+00153                         NODE_SELF
+00153                         method='instance' (1236)
+00153                       method='push' (280)
+00153                       args:
+00153                         NODE_LVAR io
+00153                         NODE_LVAR listener
+00153                         NODE_LVAR type
+00156                 NODE_SDEF:
+00156                   NODE_SELF
+00156                   :delete
+00156                     mandatory args:
+00156                       NODE_ARG io
+00156                   NODE_ARGS_TAIL:
+00157                   NODE_BEGIN:
+00157                     NODE_CALL(.):
+00157                       NODE_CALL(.):
+00157                         NODE_SELF
+00157                         method='instance' (1236)
+00157                       method='delete' (509)
+00157                       args:
+00157                         NODE_LVAR io
+00160                 NODE_SDEF:
+00160                   NODE_SELF
+00160                   :modify
+00160                     mandatory args:
+00160                       NODE_ARG io
+00160                       NODE_ARG listener
+00160                       NODE_ARG type
+00160                   NODE_ARGS_TAIL:
+00161                   NODE_BEGIN:
+00161                     NODE_CALL(.):
+00161                       NODE_CALL(.):
+00161                         NODE_SELF
+00161                         method='instance' (1236)
+00161                       method='modify' (1266)
+00161                       args:
+00161                         NODE_LVAR io
+00161                         NODE_LVAR listener
+00161                         NODE_LVAR type
+00164                 NODE_SDEF:
+00164                   NODE_SELF
+00164                   :select
+00165                   NODE_BEGIN:
+00165                     NODE_CALL(.):
+00165                       NODE_CALL(.):
+00165                         NODE_SELF
+00165                         method='instance' (1236)
+00165                       method='run' (324595712)
+irep 0x13a60fc50 nregs=2 nlocals=1 pools=0 syms=1 reps=1 iseq=11
+file: test_channel.rb
+    1 000 OP_LOADNIL	R1		
+    1 002 OP_MODULE	R1	:Rakie
+    1 005 OP_EXEC	R1	I(0:0x13a60fef0)
+    1 008 OP_RETURN	R1		
+    1 010 OP_STOP
+
+irep 0x13a60fef0 nregs=3 nlocals=1 pools=0 syms=1 reps=1 iseq=12
+file: test_channel.rb
+    2 000 OP_LOADNIL	R1		
+    2 002 OP_LOADNIL	R2		
+    2 004 OP_CLASS	R1	:Selector
+    2 007 OP_EXEC	R1	I(0:0x13a6101a0)
+    2 010 OP_RETURN	R1		
+
+irep 0x13a6101a0 nregs=3 nlocals=1 pools=0 syms=17 reps=11 iseq=148
+file: test_channel.rb
+    3 000 OP_LOADNIL	R1		
+    3 002 OP_SETIV	@instance	R1
+    5 005 OP_LOADI_1	R1		
+    5 007 OP_SETCONST	:READ_EVENT	R1
+    6 010 OP_LOADI_2	R1		
+    6 012 OP_SETCONST	:WRITE_EVENT	R1
+    8 015 OP_LOADI__1	R1		
+    8 017 OP_SETCONST	:HANDLE_FAILED	R1
+    9 020 OP_LOADI_0	R1		
+    9 022 OP_SETCONST	:HANDLE_CONTINUED	R1
+   10 025 OP_LOADI_1	R1		
+   10 027 OP_SETCONST	:HANDLE_FINISHED	R1
+   12 030 OP_LOADI_0	R1		
+   12 032 OP_SETCONST	:OPERATION_ADD	R1
+   13 035 OP_LOADI_1	R1		
+   13 037 OP_SETCONST	:OPERATION_MODIFY	R1
+   14 040 OP_LOADI_2	R1		
+   14 042 OP_SETCONST	:OPERATION_DELETE	R1
+   16 045 OP_TCLASS	R1		
+   16 047 OP_METHOD	R2	I(0:0x13a610e50)
+   16 050 OP_DEF	R1	:initialize
+   25 053 OP_TCLASS	R1		
+   25 055 OP_METHOD	R2	I(1:0x13a610fa0)
+   25 058 OP_DEF	R1	:process_signal
+   65 061 OP_TCLASS	R1		
+   65 063 OP_METHOD	R2	I(2:0x13a611240)
+   65 066 OP_DEF	R1	:run
+  133 069 OP_TCLASS	R1		
+  133 071 OP_METHOD	R2	I(3:0x13a611910)
+  133 074 OP_DEF	R1	:push
+  138 077 OP_TCLASS	R1		
+  138 079 OP_METHOD	R2	I(4:0x13a6125a0)
+  138 082 OP_DEF	R1	:delete
+  143 085 OP_TCLASS	R1		
+  143 087 OP_METHOD	R2	I(5:0x13a612730)
+  143 090 OP_DEF	R1	:modify
+  148 093 OP_LOADSELF	R1		
+  148 095 OP_SCLASS	R1	
+  148 097 OP_METHOD	R2	I(6:0x13a612850)
+  148 100 OP_DEF	R1	:instance
+  152 103 OP_LOADSELF	R1		
+  152 105 OP_SCLASS	R1	
+  152 107 OP_METHOD	R2	I(7:0x13a612960)
+  152 110 OP_DEF	R1	:push
+  156 113 OP_LOADSELF	R1		
+  156 115 OP_SCLASS	R1	
+  156 117 OP_METHOD	R2	I(8:0x13a612c30)
+  156 120 OP_DEF	R1	:delete
+  160 123 OP_LOADSELF	R1		
+  160 125 OP_SCLASS	R1	
+  160 127 OP_METHOD	R2	I(9:0x13a612a20)
+  160 130 OP_DEF	R1	:modify
+  164 133 OP_LOADSELF	R1		
+  164 135 OP_SCLASS	R1	
+  164 137 OP_METHOD	R2	I(10:0x13a612af0)
+  164 140 OP_DEF	R1	:select
+  164 143 OP_LOADSYM	R1	:select	
+  164 146 OP_RETURN	R1		
+
+irep 0x13a610e50 nregs=4 nlocals=2 pools=0 syms=8 reps=0 iseq=51
+local variable names:
+  R1:&
+file: test_channel.rb
+   16 000 OP_ENTER	0:0:0:0:0:0:0
+   17 004 OP_ARRAY	R2	0	
+   17 007 OP_SETIV	@wait_ios	R2
+   18 010 OP_GETCONST	R2	:IO
+   18 013 OP_SEND	R2	:pipe	0
+   18 017 OP_AREF	R3	R2	0
+   18 021 OP_SETIV	@signal_in	R3
+   18 024 OP_AREF	R3	R2	1
+   18 028 OP_SETIV	@signal_out	R3
+   20 031 OP_GETIV	R2	@signal_in
+   20 034 OP_GETCONST	R3	:READ_EVENT
+   20 037 OP_HASH	R2	1	
+   20 040 OP_SETIV	@ios	R2
+   22 043 OP_HASH	R2	0	
+   22 046 OP_SETIV	@handlers	R2
+   22 049 OP_RETURN	R2		
+
+irep 0x13a610fa0 nregs=14 nlocals=9 pools=9 syms=17 reps=0 iseq=394
+local variable names:
+  R1:io
+  R2:&
+  R3:signal
+  R4:operation
+  R5:new_io
+  R6:new_handler
+  R7:new_event
+  R8:handler
+file: test_channel.rb
+   25 000 OP_ENTER	1:0:0:0:0:0:0
+   26 004 OP_MOVE	R9	R1		; R1:io
+   26 007 OP_LOADI_1	R10		
+   26 009 OP_SEND	R9	:read	1
+   26 013 OP_MOVE	R3	R9		; R3:signal
+   28 016 OP_STRING	R10	L(0)	; q
+   28 019 OP_EQ		R9	R10
+   28 021 OP_JMPNOT	R9	029	
+   29 025 OP_LOADI_1	R9		
+   29 027 OP_RETURN	R9		
+   32 029 OP_GETIV	R9	@wait_ios
+   32 032 OP_SEND	R9	:shift	0
+   32 036 OP_AREF	R10	R9	0
+   32 040 OP_MOVE	R4	R10		; R4:operation
+   32 043 OP_AREF	R10	R9	1
+   32 047 OP_MOVE	R5	R10		; R5:new_io
+   32 050 OP_AREF	R10	R9	2
+   32 054 OP_MOVE	R6	R10		; R6:new_handler
+   32 057 OP_AREF	R10	R9	3
+   32 061 OP_MOVE	R7	R10		; R7:new_event
+   33 064 OP_MOVE	R9	R5		; R5:new_io
+   33 067 OP_SEND	R9	:closed?	0
+   33 071 OP_JMPNOT	R9	079	
+   34 075 OP_LOADI_0	R9		
+   34 077 OP_RETURN	R9		
+   37 079 OP_GETCONST	R9	:Log
+   37 082 OP_STRING	R10	L(1)	; Event handling 
+   37 085 OP_MOVE	R11	R3		; R3:signal
+   37 088 OP_STRCAT	R10	
+   37 090 OP_STRING	R11	L(2)	;  with 
+   37 093 OP_STRCAT	R10	
+   37 095 OP_MOVE	R11	R5		; R5:new_io
+   37 098 OP_SEND	R11	:fileno	0
+   37 102 OP_STRCAT	R10	
+   37 104 OP_STRING	R11	L(3)	;  to 
+   37 107 OP_STRCAT	R10	
+   37 109 OP_MOVE	R11	R7		; R7:new_event
+   37 112 OP_STRCAT	R10	
+   37 114 OP_STRING	R11	L(4)	; 
+   37 117 OP_STRCAT	R10	
+   37 119 OP_SEND	R9	:debug	1
+   39 123 OP_MOVE	R9	R4		; R4:operation
+   39 126 OP_GETCONST	R10	:OPERATION_ADD
+   39 129 OP_EQ		R9	R10
+   39 131 OP_JMPNOT	R9	204	
+   40 135 OP_MOVE	R9	R7		; R7:new_event
+   40 138 OP_GETIV	R10	@ios
+   40 141 OP_MOVE	R11	R5		; R5:new_io
+   40 144 OP_MOVE	R12	R9	
+   40 147 OP_SEND	R10	:[]=	2
+   41 151 OP_MOVE	R9	R6		; R6:new_handler
+   41 154 OP_GETIV	R10	@handlers
+   41 157 OP_MOVE	R11	R5		; R5:new_io
+   41 160 OP_MOVE	R12	R9	
+   41 163 OP_SEND	R10	:[]=	2
+   42 167 OP_GETCONST	R9	:Log
+   42 170 OP_STRING	R10	L(5)	; Event add all 
+   42 173 OP_MOVE	R11	R5		; R5:new_io
+   42 176 OP_SEND	R11	:fileno	0
+   42 180 OP_STRCAT	R10	
+   42 182 OP_STRING	R11	L(3)	;  to 
+   42 185 OP_STRCAT	R10	
+   42 187 OP_MOVE	R11	R7		; R7:new_event
+   42 190 OP_STRCAT	R10	
+   42 192 OP_STRING	R11	L(4)	; 
+   42 195 OP_STRCAT	R10	
+   42 197 OP_SEND	R9	:debug	1
+   42 201 OP_JMP		390
+   44 204 OP_MOVE	R9	R4		; R4:operation
+   44 207 OP_GETCONST	R10	:OPERATION_DELETE
+   44 210 OP_EQ		R9	R10
+   44 212 OP_JMPNOT	R9	312	
+   45 216 OP_GETIV	R9	@handlers
+   45 219 OP_MOVE	R10	R5		; R5:new_io
+   45 222 OP_SEND	R9	:[]	1
+   45 226 OP_MOVE	R8	R9		; R8:handler
+   47 229 OP_LOADNIL	R10		
+   47 231 OP_SEND	R9	:!=	1
+   47 235 OP_JMPNOT	R9	269	
+   48 239 OP_GETCONST	R9	:Log
+   48 242 OP_STRING	R10	L(6)	; Event close 
+   48 245 OP_MOVE	R11	R5		; R5:new_io
+   48 248 OP_STRCAT	R10	
+   48 250 OP_STRING	R11	L(4)	; 
+   48 253 OP_STRCAT	R10	
+   48 255 OP_SEND	R9	:debug	1
+   49 259 OP_MOVE	R9	R8		; R8:handler
+   49 262 OP_MOVE	R10	R5		; R5:new_io
+   49 265 OP_SEND	R9	:on_detach	1
+   52 269 OP_GETIV	R9	@ios
+   52 272 OP_MOVE	R10	R5		; R5:new_io
+   52 275 OP_SEND	R9	:delete	1
+   53 279 OP_GETIV	R9	@handlers
+   53 282 OP_MOVE	R10	R5		; R5:new_io
+   53 285 OP_SEND	R9	:delete	1
+   54 289 OP_GETCONST	R9	:Log
+   54 292 OP_STRING	R10	L(7)	; Event remove all 
+   54 295 OP_MOVE	R11	R5		; R5:new_io
+   54 298 OP_STRCAT	R10	
+   54 300 OP_STRING	R11	L(4)	; 
+   54 303 OP_STRCAT	R10	
+   54 305 OP_SEND	R9	:debug	1
+   54 309 OP_JMP		390
+   56 312 OP_MOVE	R9	R4		; R4:operation
+   56 315 OP_GETCONST	R10	:OPERATION_MODIFY
+   56 318 OP_EQ		R9	R10
+   56 320 OP_JMPNOT	R9	390	
+   57 324 OP_MOVE	R9	R7		; R7:new_event
+   57 327 OP_GETIV	R10	@ios
+   57 330 OP_MOVE	R11	R5		; R5:new_io
+   57 333 OP_MOVE	R12	R9	
+   57 336 OP_SEND	R10	:[]=	2
+   58 340 OP_MOVE	R9	R6		; R6:new_handler
+   58 343 OP_GETIV	R10	@handlers
+   58 346 OP_MOVE	R11	R5		; R5:new_io
+   58 349 OP_MOVE	R12	R9	
+   58 352 OP_SEND	R10	:[]=	2
+   59 356 OP_GETCONST	R9	:Log
+   59 359 OP_STRING	R10	L(8)	; Event modify all 
+   59 362 OP_MOVE	R11	R5		; R5:new_io
+   59 365 OP_SEND	R11	:fileno	0
+   59 369 OP_STRCAT	R10	
+   59 371 OP_STRING	R11	L(3)	;  to 
+   59 374 OP_STRCAT	R10	
+   59 376 OP_MOVE	R11	R7		; R7:new_event
+   59 379 OP_STRCAT	R10	
+   59 381 OP_STRING	R11	L(4)	; 
+   59 384 OP_STRCAT	R10	
+   59 386 OP_SEND	R9	:debug	1
+   62 390 OP_LOADI_0	R9		
+   62 392 OP_RETURN	R9		
+
+irep 0x13a611240 nregs=12 nlocals=6 pools=1 syms=8 reps=4 iseq=133
+local variable names:
+  R1:&
+  R2:read_ios
+  R3:write_ios
+  R4:read_ready
+  R5:write_ready
+file: test_channel.rb
+   65 000 OP_ENTER	0:0:0:0:0:0:0
+   66 004 OP_GETIV	R6	@ios
+   66 007 OP_BLOCK	R7	I(0:0x13a6112d0)
+   66 010 OP_SENDB	R6	:select	0
+   66 014 OP_MOVE	R2	R6		; R2:read_ios
+   67 017 OP_GETIV	R6	@ios
+   67 020 OP_BLOCK	R7	I(1:0x13a611aa0)
+   67 023 OP_SENDB	R6	:select	0
+   67 027 OP_MOVE	R3	R6		; R3:write_ios
+   69 030 OP_GETCONST	R6	:Log
+   69 033 OP_STRING	R7	L(0)	; Event selecting ...
+   69 036 OP_SEND	R6	:debug	1
+   70 040 OP_GETCONST	R6	:IO
+   70 043 OP_MOVE	R7	R2		; R2:read_ios
+   70 046 OP_SEND	R7	:keys	0
+   70 050 OP_MOVE	R8	R3		; R3:write_ios
+   70 053 OP_SEND	R8	:keys	0
+   70 057 OP_ARRAY	R9	0	
+   70 060 OP_LOADI_1	R10		
+   70 062 OP_SEND	R6	:select	4
+   70 066 OP_AREF	R7	R6	0
+   70 070 OP_MOVE	R4	R7		; R4:read_ready
+   70 073 OP_AREF	R7	R6	1
+   70 077 OP_MOVE	R5	R7		; R5:write_ready
+   72 080 OP_MOVE	R6	R4		; R4:read_ready
+   72 083 OP_LOADNIL	R7		
+   72 085 OP_SEND	R6	:!=	1
+   72 089 OP_JMPNOT	R6	103	
+   73 093 OP_MOVE	R6	R4		; R4:read_ready
+   73 096 OP_BLOCK	R7	I(2:0x13a611ba0)
+   73 099 OP_SENDB	R6	:each	0
+  107 103 OP_MOVE	R6	R5		; R5:write_ready
+  107 106 OP_LOADNIL	R7		
+  107 108 OP_SEND	R6	:!=	1
+  107 112 OP_JMPNOT	R6	129	
+  108 116 OP_MOVE	R6	R5		; R5:write_ready
+  108 119 OP_BLOCK	R7	I(3:0x13a611d20)
+  108 122 OP_SENDB	R6	:each	0
+  108 126 OP_JMP		131
+  108 129 OP_LOADNIL	R6		
+  108 131 OP_RETURN	R6		
+
+irep 0x13a6112d0 nregs=7 nlocals=4 pools=0 syms=2 reps=0 iseq=20
+local variable names:
+  R1:k
+  R2:v
+  R3:&
+file: test_channel.rb
+   66 000 OP_ENTER	2:0:0:0:0:0:0
+   66 004 OP_MOVE	R4	R2		; R2:v
+   66 007 OP_GETCONST	R5	:READ_EVENT
+   66 010 OP_SEND	R4	:&	1
+   66 014 OP_LOADI_0	R5		
+   66 016 OP_GT		R4	R5
+   66 018 OP_RETURN	R4		
+
+irep 0x13a611aa0 nregs=7 nlocals=4 pools=0 syms=2 reps=0 iseq=20
+local variable names:
+  R1:k
+  R2:v
+  R3:&
+file: test_channel.rb
+   67 000 OP_ENTER	2:0:0:0:0:0:0
+   67 004 OP_MOVE	R4	R2		; R2:v
+   67 007 OP_GETCONST	R5	:WRITE_EVENT
+   67 010 OP_SEND	R4	:&	1
+   67 014 OP_LOADI_0	R5		
+   67 016 OP_GT		R4	R5
+   67 018 OP_RETURN	R4		
+
+irep 0x13a611ba0 nregs=10 nlocals=5 pools=5 syms=17 reps=0 iseq=243
+local variable names:
+  R1:io
+  R2:&
+  R3:handler
+  R4:result
+file: test_channel.rb
+   73 000 OP_ENTER	1:0:0:0:0:0:0
+   74 004 OP_GETCONST	R5	:Log
+   74 007 OP_STRING	R6	L(0)	; Event selecting ...
+   74 010 OP_SEND	R5	:debug	1
+   76 014 OP_MOVE	R5	R1		; R1:io
+   76 017 OP_GETIV	R6	@signal_in
+   76 020 OP_EQ		R5	R6
+   76 022 OP_JMPNOT	R5	053	
+   77 026 OP_LOADSELF	R5		
+   77 028 OP_MOVE	R6	R1		; R1:io
+   77 031 OP_SEND	R5	:process_signal	1
+   77 035 OP_LOADI_0	R6		
+   77 037 OP_SEND	R5	:!=	1
+   77 041 OP_JMPNOT	R5	049	
+   78 045 OP_LOADNIL	R5		
+   78 047 OP_RETURN_BLK	R5		
+   81 049 OP_LOADNIL	R5		
+   81 051 OP_RETURN	R5		
+   84 053 OP_GETIV	R5	@handlers
+   84 056 OP_MOVE	R6	R1		; R1:io
+   84 059 OP_SEND	R5	:[]	1
+   84 063 OP_MOVE	R3	R5		; R3:handler
+   86 066 OP_LOADNIL	R6		
+   86 068 OP_EQ		R5	R6
+   86 070 OP_JMPNOT	R5	078	
+   87 074 OP_LOADNIL	R5		
+   87 076 OP_RETURN	R5		
+   90 078 OP_MOVE	R5	R3		; R3:handler
+   90 081 OP_MOVE	R6	R1		; R1:io
+   90 084 OP_SEND	R5	:on_read	1
+   90 088 OP_MOVE	R4	R5		; R4:result
+   92 091 OP_GETCONST	R6	:HANDLE_FINISHED
+   92 094 OP_EQ		R5	R6
+   92 096 OP_JMPNOT	R5	154	
+   93 100 OP_GETIV	R5	@ios
+   93 103 OP_MOVE	R6	R1		; R1:io
+   93 106 OP_MOVE	R7	R5	
+   93 109 OP_MOVE	R8	R6	
+   93 112 OP_SEND	R7	:[]	1
+   93 116 OP_GETCONST	R8	:READ_EVENT
+   93 119 OP_SEND	R8	:~	0
+   93 123 OP_SEND	R7	:&	1
+   93 127 OP_SEND	R5	:[]=	2
+   94 131 OP_GETCONST	R5	:Log
+   94 134 OP_STRING	R6	L(1)	; Event remove read 
+   94 137 OP_MOVE	R7	R1		; R1:io
+   94 140 OP_STRCAT	R6	
+   94 142 OP_STRING	R7	L(2)	; 
+   94 145 OP_STRCAT	R6	
+   94 147 OP_SEND	R5	:debug	1
+   94 151 OP_JMP		241
+   96 154 OP_MOVE	R5	R4		; R4:result
+   96 157 OP_GETCONST	R6	:HANDLE_FAILED
+   96 160 OP_EQ		R5	R6
+   96 162 OP_JMPNOT	R5	239	
+   97 166 OP_MOVE	R5	R3		; R3:handler
+   97 169 OP_MOVE	R6	R1		; R1:io
+   97 172 OP_SEND	R5	:on_detach	1
+   98 176 OP_GETCONST	R5	:Log
+   98 179 OP_STRING	R6	L(3)	; Event close 
+   98 182 OP_MOVE	R7	R1		; R1:io
+   98 185 OP_STRCAT	R6	
+   98 187 OP_STRING	R7	L(2)	; 
+   98 190 OP_STRCAT	R6	
+   98 192 OP_SEND	R5	:debug	1
+  100 196 OP_GETIV	R5	@ios
+  100 199 OP_MOVE	R6	R1		; R1:io
+  100 202 OP_SEND	R5	:delete	1
+  101 206 OP_GETIV	R5	@handlers
+  101 209 OP_MOVE	R6	R1		; R1:io
+  101 212 OP_SEND	R5	:delete	1
+  102 216 OP_GETCONST	R5	:Log
+  102 219 OP_STRING	R6	L(4)	; Event remove all 
+  102 222 OP_MOVE	R7	R1		; R1:io
+  102 225 OP_STRCAT	R6	
+  102 227 OP_STRING	R7	L(2)	; 
+  102 230 OP_STRCAT	R6	
+  102 232 OP_SEND	R5	:debug	1
+  102 236 OP_JMP		241
+  102 239 OP_LOADNIL	R5		
+  102 241 OP_RETURN	R5		
+
+irep 0x13a611d20 nregs=10 nlocals=5 pools=4 syms=14 reps=0 iseq=194
+local variable names:
+  R1:io
+  R2:&
+  R3:handler
+  R4:result
+file: test_channel.rb
+  108 000 OP_ENTER	1:0:0:0:0:0:0
+  109 004 OP_GETIV	R5	@handlers
+  109 007 OP_MOVE	R6	R1		; R1:io
+  109 010 OP_SEND	R5	:[]	1
+  109 014 OP_MOVE	R3	R5		; R3:handler
+  111 017 OP_LOADNIL	R6		
+  111 019 OP_EQ		R5	R6
+  111 021 OP_JMPNOT	R5	029	
+  112 025 OP_LOADNIL	R5		
+  112 027 OP_RETURN	R5		
+  115 029 OP_MOVE	R5	R3		; R3:handler
+  115 032 OP_MOVE	R6	R1		; R1:io
+  115 035 OP_SEND	R5	:on_write	1
+  115 039 OP_MOVE	R4	R5		; R4:result
+  117 042 OP_GETCONST	R6	:HANDLE_FINISHED
+  117 045 OP_EQ		R5	R6
+  117 047 OP_JMPNOT	R5	105	
+  118 051 OP_GETIV	R5	@ios
+  118 054 OP_MOVE	R6	R1		; R1:io
+  118 057 OP_MOVE	R7	R5	
+  118 060 OP_MOVE	R8	R6	
+  118 063 OP_SEND	R7	:[]	1
+  118 067 OP_GETCONST	R8	:WRITE_EVENT
+  118 070 OP_SEND	R8	:~	0
+  118 074 OP_SEND	R7	:&	1
+  118 078 OP_SEND	R5	:[]=	2
+  119 082 OP_GETCONST	R5	:Log
+  119 085 OP_STRING	R6	L(0)	; Event remove write 
+  119 088 OP_MOVE	R7	R1		; R1:io
+  119 091 OP_STRCAT	R6	
+  119 093 OP_STRING	R7	L(1)	; 
+  119 096 OP_STRCAT	R6	
+  119 098 OP_SEND	R5	:debug	1
+  119 102 OP_JMP		192
+  121 105 OP_MOVE	R5	R4		; R4:result
+  121 108 OP_GETCONST	R6	:HANDLE_FAILED
+  121 111 OP_EQ		R5	R6
+  121 113 OP_JMPNOT	R5	190	
+  122 117 OP_MOVE	R5	R3		; R3:handler
+  122 120 OP_MOVE	R6	R1		; R1:io
+  122 123 OP_SEND	R5	:on_detach	1
+  123 127 OP_GETCONST	R5	:Log
+  123 130 OP_STRING	R6	L(2)	; Event close 
+  123 133 OP_MOVE	R7	R1		; R1:io
+  123 136 OP_STRCAT	R6	
+  123 138 OP_STRING	R7	L(1)	; 
+  123 141 OP_STRCAT	R6	
+  123 143 OP_SEND	R5	:debug	1
+  125 147 OP_GETIV	R5	@ios
+  125 150 OP_MOVE	R6	R1		; R1:io
+  125 153 OP_SEND	R5	:delete	1
+  126 157 OP_GETIV	R5	@handlers
+  126 160 OP_MOVE	R6	R1		; R1:io
+  126 163 OP_SEND	R5	:delete	1
+  127 167 OP_GETCONST	R5	:Log
+  127 170 OP_STRING	R6	L(3)	; Event remove all 
+  127 173 OP_MOVE	R7	R1		; R1:io
+  127 176 OP_STRCAT	R6	
+  127 178 OP_STRING	R7	L(1)	; 
+  127 181 OP_STRCAT	R6	
+  127 183 OP_SEND	R5	:debug	1
+  127 187 OP_JMP		192
+  127 190 OP_LOADNIL	R5		
+  127 192 OP_RETURN	R5		
+
+irep 0x13a611910 nregs=10 nlocals=5 pools=1 syms=5 reps=0 iseq=38
+local variable names:
+  R1:io
+  R2:handler
+  R3:event
+  R4:&
+file: test_channel.rb
+  133 000 OP_ENTER	3:0:0:0:0:0:0
+  134 004 OP_GETIV	R5	@wait_ios
+  134 007 OP_GETCONST	R6	:OPERATION_ADD
+  134 010 OP_MOVE	R7	R1		; R1:io
+  134 013 OP_MOVE	R8	R2		; R2:handler
+  134 016 OP_MOVE	R9	R3		; R3:event
+  134 019 OP_ARRAY	R6	4	
+  134 022 OP_SEND	R5	:push	1
+  135 026 OP_GETIV	R5	@signal_out
+  135 029 OP_STRING	R6	L(0)	; a
+  135 032 OP_SEND	R5	:write	1
+  135 036 OP_RETURN	R5		
+
+irep 0x13a6125a0 nregs=8 nlocals=3 pools=1 syms=5 reps=0 iseq=36
+local variable names:
+  R1:io
+  R2:&
+file: test_channel.rb
+  138 000 OP_ENTER	1:0:0:0:0:0:0
+  139 004 OP_GETIV	R3	@wait_ios
+  139 007 OP_GETCONST	R4	:OPERATION_DELETE
+  139 010 OP_MOVE	R5	R1		; R1:io
+  139 013 OP_LOADNIL	R6		
+  139 015 OP_LOADNIL	R7		
+  139 017 OP_ARRAY	R4	4	
+  139 020 OP_SEND	R3	:push	1
+  140 024 OP_GETIV	R3	@signal_out
+  140 027 OP_STRING	R4	L(0)	; a
+  140 030 OP_SEND	R3	:write	1
+  140 034 OP_RETURN	R3		
+
+irep 0x13a612730 nregs=10 nlocals=5 pools=1 syms=5 reps=0 iseq=38
+local variable names:
+  R1:io
+  R2:handler
+  R3:event
+  R4:&
+file: test_channel.rb
+  143 000 OP_ENTER	3:0:0:0:0:0:0
+  144 004 OP_GETIV	R5	@wait_ios
+  144 007 OP_GETCONST	R6	:OPERATION_MODIFY
+  144 010 OP_MOVE	R7	R1		; R1:io
+  144 013 OP_MOVE	R8	R2		; R2:handler
+  144 016 OP_MOVE	R9	R3		; R3:event
+  144 019 OP_ARRAY	R6	4	
+  144 022 OP_SEND	R5	:push	1
+  145 026 OP_GETIV	R5	@signal_out
+  145 029 OP_STRING	R6	L(0)	; a
+  145 032 OP_SEND	R5	:write	1
+  145 036 OP_RETURN	R5		
+
+irep 0x13a612850 nregs=4 nlocals=2 pools=0 syms=3 reps=0 iseq=23
+local variable names:
+  R1:&
+file: test_channel.rb
+  148 000 OP_ENTER	0:0:0:0:0:0:0
+  149 004 OP_GETIV	R2	@instance
+  149 007 OP_JMPIF	R2	021	
+  149 011 OP_GETCONST	R2	:Selector
+  149 014 OP_SEND	R2	:new	0
+  149 018 OP_SETIV	@instance	R2
+  149 021 OP_RETURN	R2		
+
+irep 0x13a612960 nregs=10 nlocals=5 pools=0 syms=2 reps=0 iseq=25
+local variable names:
+  R1:io
+  R2:listener
+  R3:type
+  R4:&
+file: test_channel.rb
+  152 000 OP_ENTER	3:0:0:0:0:0:0
+  153 004 OP_LOADSELF	R5		
+  153 006 OP_SEND	R5	:instance	0
+  153 010 OP_MOVE	R6	R1		; R1:io
+  153 013 OP_MOVE	R7	R2		; R2:listener
+  153 016 OP_MOVE	R8	R3		; R3:type
+  153 019 OP_SEND	R5	:push	3
+  153 023 OP_RETURN	R5		
+
+irep 0x13a612c30 nregs=6 nlocals=3 pools=0 syms=2 reps=0 iseq=19
+local variable names:
+  R1:io
+  R2:&
+file: test_channel.rb
+  156 000 OP_ENTER	1:0:0:0:0:0:0
+  157 004 OP_LOADSELF	R3		
+  157 006 OP_SEND	R3	:instance	0
+  157 010 OP_MOVE	R4	R1		; R1:io
+  157 013 OP_SEND	R3	:delete	1
+  157 017 OP_RETURN	R3		
+
+irep 0x13a612a20 nregs=10 nlocals=5 pools=0 syms=2 reps=0 iseq=25
+local variable names:
+  R1:io
+  R2:listener
+  R3:type
+  R4:&
+file: test_channel.rb
+  160 000 OP_ENTER	3:0:0:0:0:0:0
+  161 004 OP_LOADSELF	R5		
+  161 006 OP_SEND	R5	:instance	0
+  161 010 OP_MOVE	R6	R1		; R1:io
+  161 013 OP_MOVE	R7	R2		; R2:listener
+  161 016 OP_MOVE	R8	R3		; R3:type
+  161 019 OP_SEND	R5	:modify	3
+  161 023 OP_RETURN	R5		
+
+irep 0x13a612af0 nregs=4 nlocals=2 pools=0 syms=2 reps=0 iseq=16
+local variable names:
+  R1:&
+file: test_channel.rb
+  164 000 OP_ENTER	0:0:0:0:0:0:0
+  165 004 OP_LOADSELF	R2		
+  165 006 OP_SEND	R2	:instance	0
+  165 010 OP_SEND	R2	:run	0
+  165 014 OP_RETURN	R2		
+
+00001 NODE_SCOPE:
+00001   NODE_BEGIN:
+00001     NODE_MODULE:
+00096       :Rakie
+00096       body:
+00001         NODE_BEGIN:
+00002           NODE_CLASS:
+00095             :Log
+00095             body:
+00002               NODE_BEGIN:
+00003                 NODE_FCALL:
+00003                   NODE_SELF
+00003                   method='attr_accessor' (1072)
+00003                   args:
+00003                     NODE_SYM :out (135)
+00003                     NODE_SYM :level (406)
+00005                 NODE_ASGN:
+00005                   lhs:
+00005                     NODE_IVAR @instance
+00005                   rhs:
+00005                     NODE_NIL
+00007                 NODE_ASGN:
+00007                   lhs:
+00007                     NODE_CONST LEVEL_INFO
+00007                   rhs:
+00007                     NODE_INT 0 base 10
+00008                 NODE_ASGN:
+00008                   lhs:
+00008                     NODE_CONST LEVEL_ERROR
+00008                   rhs:
+00008                     NODE_INT 1 base 10
+00009                 NODE_ASGN:
+00009                   lhs:
+00009                     NODE_CONST LEVEL_DEBUG
+00009                   rhs:
+00009                     NODE_INT 2 base 10
+00011                 NODE_DEF:
+00011                   initialize
+00011                   local variables:
+00011                     &
+00012                   NODE_BEGIN:
+00012                     NODE_ASGN:
+00012                       lhs:
+00012                         NODE_IVAR @level
+00012                       rhs:
+00012                         NODE_CONST LEVEL_DEBUG
+00013                     NODE_ASGN:
+00013                       lhs:
+00013                         NODE_IVAR @out
+00013                       rhs:
+00013                         NODE_CONST STDOUT
+00016                 NODE_DEF:
+00016                   level_text
+00016                   local variables:
+00016                     level, &
+00016                   optional args:
+00016                     level=
+00016                       NODE_NIL
+00016                 NODE_ARGS_TAIL:
+00017                   NODE_BEGIN:
+00017                     NODE_IF:
+00019                       cond:
+00017                         NODE_LVAR level
+00019                       then:
+00019                       else:
+00018                         NODE_BEGIN:
+00018                           NODE_ASGN:
+00018                             lhs:
+00018                               NODE_LVAR level
+00018                             rhs:
+00018                               NODE_IVAR @level
+00030                     NODE_CASE:
+00021                       NODE_LVAR level
+00030                       case:
+00022                         NODE_CONST LEVEL_INFO
+00030                       body:
+00023                         NODE_BEGIN:
+00023                           NODE_RETURN:
+00023                             NODE_STR "INFO" len 4
+00030                       case:
+00025                         NODE_CONST LEVEL_ERROR
+00030                       body:
+00026                         NODE_BEGIN:
+00026                           NODE_RETURN:
+00026                             NODE_STR "ERROR" len 5
+00030                       case:
+00028                         NODE_CONST LEVEL_DEBUG
+00030                       body:
+00029                         NODE_BEGIN:
+00029                           NODE_RETURN:
+00029                             NODE_STR "DEBUG" len 5
+00033                 NODE_DEF:
+00033                   level_info?
+00033                   local variables:
+00033                     &
+00034                   NODE_BEGIN:
+00034                     NODE_CALL(.):
+00034                       NODE_IVAR @level
+00034                       method='>=' (49)
+00034                       args:
+00034                         NODE_CONST LEVEL_INFO
+00037                 NODE_DEF:
+00037                   level_error?
+00037                   local variables:
+00037                     &
+00038                   NODE_BEGIN:
+00038                     NODE_CALL(.):
+00038                       NODE_IVAR @level
+00038                       method='>=' (49)
+00038                       args:
+00038                         NODE_CONST LEVEL_ERROR
+00041                 NODE_DEF:
+00041                   level_debug?
+00041                   local variables:
+00041                     &
+00042                   NODE_BEGIN:
+00042                     NODE_CALL(.):
+00042                       NODE_IVAR @level
+00042                       method='>=' (49)
+00042                       args:
+00042                         NODE_CONST LEVEL_DEBUG
+00045                 NODE_SDEF:
+00045                   NODE_SELF
+00045                   :instance
+00046                   NODE_BEGIN:
+00046                     NODE_OP_ASGN:
+00046                       lhs:
+00046                         NODE_IVAR @instance
+00046                       op='||' (81)
+00046                       NODE_CALL(.):
+00046                         NODE_CONST Log
+00046                         method='new' (128)
+00049                 NODE_SDEF:
+00049                   NODE_SELF
+00049                   :info
+00049                     mandatory args:
+00049                       NODE_ARG message
+00049                     optional args:
+00049                       who=
+00049                         NODE_NIL
+00049                   NODE_ARGS_TAIL:
+00050                   NODE_BEGIN:
+00050                     NODE_IF:
+00052                       cond:
+00050                         NODE_CALL(.):
+00050                           NODE_CALL(.):
+00050                             NODE_SELF
+00050                             method='instance' (1236)
+00050                           method='level_info?' (1273)
+00052                       then:
+00052                       else:
+00051                         NODE_BEGIN:
+00051                           NODE_RETURN:
+00054                     NODE_IF:
+00056                       cond:
+00054                         NODE_LVAR who
+00056                       then:
+00055                         NODE_BEGIN:
+00055                           NODE_ASGN:
+00055                             lhs:
+00055                               NODE_LVAR message
+00055                             rhs:
+00055                               NODE_DSTR:
+00055                                 NODE_STR "" len 0
+00055                                 NODE_BEGIN:
+00055                                   NODE_LVAR who
+00055                                 NODE_STR ": " len 2
+00055                                 NODE_BEGIN:
+00055                                   NODE_LVAR message
+00055                                 NODE_STR "" len 0
+00058                     NODE_ASGN:
+00058                       lhs:
+00058                         NODE_LVAR level
+00058                       rhs:
+00058                         NODE_CALL(.):
+00058                           NODE_CALL(.):
+00058                             NODE_SELF
+00058                             method='instance' (1236)
+00058                           method='level_text' (1272)
+00058                           args:
+00058                             NODE_CONST LEVEL_INFO
+00059                     NODE_CALL(.):
+00059                       NODE_CALL(.):
+00059                         NODE_CALL(.):
+00059                           NODE_SELF
+00059                           method='instance' (1236)
+00059                         method='out' (135)
+00059                       method='write' (459)
+00059                       args:
+00059                         NODE_DSTR:
+00059                           NODE_STR "[" len 1
+00059                           NODE_BEGIN:
+00059                             NODE_CALL(.):
+00059                               NODE_CALL(.):
+00059                                 NODE_CONST Time
+00059                                 method='now' (129)
+00059                               method='to_s' (314)
+00059                           NODE_STR "][" len 2
+00059                           NODE_BEGIN:
+00059                             NODE_LVAR level
+00059                           NODE_STR "] " len 2
+00059                           NODE_BEGIN:
+00059                             NODE_LVAR message
+00059                           NODE_STR "\n" len 1
+00062                 NODE_SDEF:
+00062                   NODE_SELF
+00062                   :error
+00062                     mandatory args:
+00062                       NODE_ARG message
+00062                     optional args:
+00062                       who=
+00062                         NODE_NIL
+00062                   NODE_ARGS_TAIL:
+00063                   NODE_BEGIN:
+00063                     NODE_IF:
+00065                       cond:
+00063                         NODE_CALL(.):
+00063                           NODE_CALL(.):
+00063                             NODE_SELF
+00063                             method='instance' (1236)
+00063                           method='level_error?' (1274)
+00065                       then:
+00065                       else:
+00064                         NODE_BEGIN:
+00064                           NODE_RETURN:
+00067                     NODE_IF:
+00069                       cond:
+00067                         NODE_LVAR who
+00069                       then:
+00068                         NODE_BEGIN:
+00068                           NODE_ASGN:
+00068                             lhs:
+00068                               NODE_LVAR message
+00068                             rhs:
+00068                               NODE_DSTR:
+00068                                 NODE_STR "" len 0
+00068                                 NODE_BEGIN:
+00068                                   NODE_LVAR who
+00068                                 NODE_STR ": " len 2
+00068                                 NODE_BEGIN:
+00068                                   NODE_LVAR message
+00068                                 NODE_STR "" len 0
+00071                     NODE_ASGN:
+00071                       lhs:
+00071                         NODE_LVAR level
+00071                       rhs:
+00071                         NODE_CALL(.):
+00071                           NODE_CALL(.):
+00071                             NODE_SELF
+00071                             method='instance' (1236)
+00071                           method='level_text' (1272)
+00071                           args:
+00071                             NODE_CONST LEVEL_ERROR
+00072                     NODE_CALL(.):
+00072                       NODE_CALL(.):
+00072                         NODE_CALL(.):
+00072                           NODE_SELF
+00072                           method='instance' (1236)
+00072                         method='out' (135)
+00072                       method='write' (459)
+00072                       args:
+00072                         NODE_DSTR:
+00072                           NODE_STR "[" len 1
+00072                           NODE_BEGIN:
+00072                             NODE_CALL(.):
+00072                               NODE_CALL(.):
+00072                                 NODE_CONST Time
+00072                                 method='now' (129)
+00072                               method='to_s' (314)
+00072                           NODE_STR "][" len 2
+00072                           NODE_BEGIN:
+00072                             NODE_LVAR level
+00072                           NODE_STR "] " len 2
+00072                           NODE_BEGIN:
+00072                             NODE_LVAR message
+00072                           NODE_STR "\n" len 1
+00075                 NODE_SDEF:
+00075                   NODE_SELF
+00075                   :debug
+00075                     mandatory args:
+00075                       NODE_ARG message
+00075                     optional args:
+00075                       who=
+00075                         NODE_NIL
+00075                   NODE_ARGS_TAIL:
+00076                   NODE_BEGIN:
+00076                     NODE_IF:
+00078                       cond:
+00076                         NODE_CALL(.):
+00076                           NODE_CALL(.):
+00076                             NODE_SELF
+00076                             method='instance' (1236)
+00076                           method='level_debug?' (1275)
+00078                       then:
+00078                       else:
+00077                         NODE_BEGIN:
+00077                           NODE_RETURN:
+00080                     NODE_IF:
+00082                       cond:
+00080                         NODE_LVAR who
+00082                       then:
+00081                         NODE_BEGIN:
+00081                           NODE_ASGN:
+00081                             lhs:
+00081                               NODE_LVAR message
+00081                             rhs:
+00081                               NODE_DSTR:
+00081                                 NODE_STR "" len 0
+00081                                 NODE_BEGIN:
+00081                                   NODE_LVAR who
+00081                                 NODE_STR ": " len 2
+00081                                 NODE_BEGIN:
+00081                                   NODE_LVAR message
+00081                                 NODE_STR "" len 0
+00084                     NODE_ASGN:
+00084                       lhs:
+00084                         NODE_LVAR level
+00084                       rhs:
+00084                         NODE_CALL(.):
+00084                           NODE_CALL(.):
+00084                             NODE_SELF
+00084                             method='instance' (1236)
+00084                           method='level_text' (1272)
+00084                           args:
+00084                             NODE_CONST LEVEL_DEBUG
+00085                     NODE_CALL(.):
+00085                       NODE_CALL(.):
+00085                         NODE_CALL(.):
+00085                           NODE_SELF
+00085                           method='instance' (1236)
+00085                         method='out' (135)
+00085                       method='print' (428)
+00085                       args:
+00085                         NODE_DSTR:
+00085                           NODE_STR "[" len 1
+00085                           NODE_BEGIN:
+00085                             NODE_CALL(.):
+00085                               NODE_CALL(.):
+00085                                 NODE_CONST Time
+00085                                 method='now' (129)
+00085                               method='to_s' (314)
+00085                           NODE_STR "][" len 2
+00085                           NODE_BEGIN:
+00085                             NODE_LVAR level
+00085                           NODE_STR "] " len 2
+00085                           NODE_BEGIN:
+00085                             NODE_LVAR message
+00085                           NODE_STR "\n" len 1
+00088                 NODE_SDEF:
+00088                   NODE_SELF
+00088                   :level
+00089                   NODE_BEGIN:
+00089                     NODE_CALL(.):
+00089                       NODE_CALL(.):
+00089                         NODE_SELF
+00089                         method='instance' (1236)
+00089                       method='level' (406)
+00092                 NODE_SDEF:
+00092                   NODE_SELF
+00092                   :level=
+00092                     mandatory args:
+00092                       NODE_ARG level
+00092                   NODE_ARGS_TAIL:
+00093                   NODE_BEGIN:
+00093                     NODE_ASGN:
+00093                       lhs:
+00093                         NODE_CALL(.):
+00093                           NODE_CALL(.):
+00093                             NODE_SELF
+00093                             method='instance' (1236)
+00093                           method='level' (406)
+00093                       rhs:
+00093                         NODE_LVAR level
+irep 0x13a60fdc0 nregs=2 nlocals=1 pools=0 syms=1 reps=1 iseq=11
+file: test_channel.rb
+    1 000 OP_LOADNIL	R1		
+    1 002 OP_MODULE	R1	:Rakie
+    1 005 OP_EXEC	R1	I(0:0x13a60fe30)
+    1 008 OP_RETURN	R1		
+    1 010 OP_STOP
+
+irep 0x13a60fe30 nregs=3 nlocals=1 pools=0 syms=1 reps=1 iseq=12
+file: test_channel.rb
+    2 000 OP_LOADNIL	R1		
+    2 002 OP_LOADNIL	R2		
+    2 004 OP_CLASS	R1	:Log
+    2 007 OP_EXEC	R1	I(0:0x13a613340)
+    2 010 OP_RETURN	R1		
+
+irep 0x13a613340 nregs=5 nlocals=1 pools=0 syms=17 reps=11 iseq=137
+file: test_channel.rb
+    3 000 OP_LOADSELF	R1		
+    3 002 OP_LOADSYM	R2	:out	
+    3 005 OP_LOADSYM	R3	:level	
+    3 008 OP_SEND	R1	:attr_accessor	2
+    5 012 OP_LOADNIL	R1		
+    5 014 OP_SETIV	@instance	R1
+    7 017 OP_LOADI_0	R1		
+    7 019 OP_SETCONST	:LEVEL_INFO	R1
+    8 022 OP_LOADI_1	R1		
+    8 024 OP_SETCONST	:LEVEL_ERROR	R1
+    9 027 OP_LOADI_2	R1		
+    9 029 OP_SETCONST	:LEVEL_DEBUG	R1
+   11 032 OP_TCLASS	R1		
+   11 034 OP_METHOD	R2	I(0:0x13a6135f0)
+   11 037 OP_DEF	R1	:initialize
+   16 040 OP_TCLASS	R1		
+   16 042 OP_METHOD	R2	I(1:0x13a6136f0)
+   16 045 OP_DEF	R1	:level_text
+   33 048 OP_TCLASS	R1		
+   33 050 OP_METHOD	R2	I(2:0x13a6139c0)
+   33 053 OP_DEF	R1	:level_info?
+   37 056 OP_TCLASS	R1		
+   37 058 OP_METHOD	R2	I(3:0x13a613a70)
+   37 061 OP_DEF	R1	:level_error?
+   41 064 OP_TCLASS	R1		
+   41 066 OP_METHOD	R2	I(4:0x13a613b20)
+   41 069 OP_DEF	R1	:level_debug?
+   45 072 OP_LOADSELF	R1		
+   45 074 OP_SCLASS	R1	
+   45 076 OP_METHOD	R2	I(5:0x13a613c00)
+   45 079 OP_DEF	R1	:instance
+   49 082 OP_LOADSELF	R1		
+   49 084 OP_SCLASS	R1	
+   49 086 OP_METHOD	R2	I(6:0x13a613d30)
+   49 089 OP_DEF	R1	:info
+   62 092 OP_LOADSELF	R1		
+   62 094 OP_SCLASS	R1	
+   62 096 OP_METHOD	R2	I(7:0x13a614060)
+   62 099 OP_DEF	R1	:error
+   75 102 OP_LOADSELF	R1		
+   75 104 OP_SCLASS	R1	
+   75 106 OP_METHOD	R2	I(8:0x13a6143c0)
+   75 109 OP_DEF	R1	:debug
+   88 112 OP_LOADSELF	R1		
+   88 114 OP_SCLASS	R1	
+   88 116 OP_METHOD	R2	I(9:0x13a614730)
+   88 119 OP_DEF	R1	:level
+   92 122 OP_LOADSELF	R1		
+   92 124 OP_SCLASS	R1	
+   92 126 OP_METHOD	R2	I(10:0x13a6147e0)
+   92 129 OP_DEF	R1	:level=
+   92 132 OP_LOADSYM	R1	:level=	
+   92 135 OP_RETURN	R1		
+
+irep 0x13a6135f0 nregs=3 nlocals=2 pools=0 syms=4 reps=0 iseq=18
+local variable names:
+  R1:&
+file: test_channel.rb
+   11 000 OP_ENTER	0:0:0:0:0:0:0
+   12 004 OP_GETCONST	R2	:LEVEL_DEBUG
+   12 007 OP_SETIV	@level	R2
+   13 010 OP_GETCONST	R2	:STDOUT
+   13 013 OP_SETIV	@out	R2
+   13 016 OP_RETURN	R2		
+
+irep 0x13a6136f0 nregs=7 nlocals=3 pools=3 syms=5 reps=0 iseq=101
+local variable names:
+  R1:level
+  R2:&
+file: test_channel.rb
+   16 000 OP_ENTER	0:1:0:0:0:0:0
+   16 004 OP_JMP		010
+   16 007 OP_JMP		012
+   16 010 OP_LOADNIL	R1			; R1:level
+   17 012 OP_JMPIF	R1	019		; R1:level
+   18 016 OP_GETIV	R1	@level	; R1:level
+   21 019 OP_MOVE	R3	R1		; R1:level
+   22 022 OP_GETCONST	R4	:LEVEL_INFO
+   22 025 OP_MOVE	R5	R3	
+   22 028 OP_SEND	R4	:===	1
+   22 032 OP_JMPIF	R4	039	
+   22 036 OP_JMP		047
+   23 039 OP_STRING	R4	L(0)	; INFO
+   23 042 OP_RETURN	R4		
+   23 044 OP_JMP		099
+   25 047 OP_GETCONST	R4	:LEVEL_ERROR
+   25 050 OP_MOVE	R5	R3	
+   25 053 OP_SEND	R4	:===	1
+   25 057 OP_JMPIF	R4	064	
+   25 061 OP_JMP		072
+   26 064 OP_STRING	R4	L(1)	; ERROR
+   26 067 OP_RETURN	R4		
+   26 069 OP_JMP		099
+   28 072 OP_GETCONST	R4	:LEVEL_DEBUG
+   28 075 OP_MOVE	R5	R3	
+   28 078 OP_SEND	R4	:===	1
+   28 082 OP_JMPIF	R4	089	
+   28 086 OP_JMP		097
+   29 089 OP_STRING	R4	L(2)	; DEBUG
+   29 092 OP_RETURN	R4		
+   29 094 OP_JMP		099
+   29 097 OP_LOADNIL	R4		
+   29 099 OP_RETURN	R4		
+
+irep 0x13a6139c0 nregs=5 nlocals=2 pools=0 syms=2 reps=0 iseq=14
+local variable names:
+  R1:&
+file: test_channel.rb
+   33 000 OP_ENTER	0:0:0:0:0:0:0
+   34 004 OP_GETIV	R2	@level
+   34 007 OP_GETCONST	R3	:LEVEL_INFO
+   34 010 OP_GE		R2	R3
+   34 012 OP_RETURN	R2		
+
+irep 0x13a613a70 nregs=5 nlocals=2 pools=0 syms=2 reps=0 iseq=14
+local variable names:
+  R1:&
+file: test_channel.rb
+   37 000 OP_ENTER	0:0:0:0:0:0:0
+   38 004 OP_GETIV	R2	@level
+   38 007 OP_GETCONST	R3	:LEVEL_ERROR
+   38 010 OP_GE		R2	R3
+   38 012 OP_RETURN	R2		
+
+irep 0x13a613b20 nregs=5 nlocals=2 pools=0 syms=2 reps=0 iseq=14
+local variable names:
+  R1:&
+file: test_channel.rb
+   41 000 OP_ENTER	0:0:0:0:0:0:0
+   42 004 OP_GETIV	R2	@level
+   42 007 OP_GETCONST	R3	:LEVEL_DEBUG
+   42 010 OP_GE		R2	R3
+   42 012 OP_RETURN	R2		
+
+irep 0x13a613c00 nregs=4 nlocals=2 pools=0 syms=3 reps=0 iseq=23
+local variable names:
+  R1:&
+file: test_channel.rb
+   45 000 OP_ENTER	0:0:0:0:0:0:0
+   46 004 OP_GETIV	R2	@instance
+   46 007 OP_JMPIF	R2	021	
+   46 011 OP_GETCONST	R2	:Log
+   46 014 OP_SEND	R2	:new	0
+   46 018 OP_SETIV	@instance	R2
+   46 021 OP_RETURN	R2		
+
+irep 0x13a613d30 nregs=9 nlocals=5 pools=6 syms=9 reps=0 iseq=133
+local variable names:
+  R1:message
+  R2:who
+  R3:&
+  R4:level
+file: test_channel.rb
+   49 000 OP_ENTER	1:1:0:0:0:0:0
+   49 004 OP_JMP		010
+   49 007 OP_JMP		012
+   49 010 OP_LOADNIL	R2			; R2:who
+   50 012 OP_LOADSELF	R5		
+   50 014 OP_SEND	R5	:instance	0
+   50 018 OP_SEND	R5	:level_info?	0
+   50 022 OP_JMPIF	R5	030	
+   51 026 OP_LOADNIL	R5		
+   51 028 OP_RETURN	R5		
+   54 030 OP_JMPNOT	R2	060		; R2:who
+   55 034 OP_STRING	R5	L(0)	; 
+   55 037 OP_MOVE	R6	R2		; R2:who
+   55 040 OP_STRCAT	R5	
+   55 042 OP_STRING	R6	L(1)	; : 
+   55 045 OP_STRCAT	R5	
+   55 047 OP_MOVE	R6	R1		; R1:message
+   55 050 OP_STRCAT	R5	
+   55 052 OP_STRING	R6	L(0)	; 
+   55 055 OP_STRCAT	R5	
+   55 057 OP_MOVE	R1	R5		; R1:message
+   58 060 OP_LOADSELF	R5		
+   58 062 OP_SEND	R5	:instance	0
+   58 066 OP_GETCONST	R6	:LEVEL_INFO
+   58 069 OP_SEND	R5	:level_text	1
+   58 073 OP_MOVE	R4	R5		; R4:level
+   59 076 OP_LOADSELF	R5		
+   59 078 OP_SEND	R5	:instance	0
+   59 082 OP_SEND	R5	:out	0
+   59 086 OP_STRING	R6	L(2)	; [
+   59 089 OP_GETCONST	R7	:Time
+   59 092 OP_SEND	R7	:now	0
+   59 096 OP_SEND	R7	:to_s	0
+   59 100 OP_STRCAT	R6	
+   59 102 OP_STRING	R7	L(3)	; ][
+   59 105 OP_STRCAT	R6	
+   59 107 OP_MOVE	R7	R4		; R4:level
+   59 110 OP_STRCAT	R6	
+   59 112 OP_STRING	R7	L(4)	; ] 
+   59 115 OP_STRCAT	R6	
+   59 117 OP_MOVE	R7	R1		; R1:message
+   59 120 OP_STRCAT	R6	
+   59 122 OP_STRING	R7	L(5)	; 
+
+   59 125 OP_STRCAT	R6	
+   59 127 OP_SEND	R5	:write	1
+   59 131 OP_RETURN	R5		
+
+irep 0x13a614060 nregs=9 nlocals=5 pools=6 syms=9 reps=0 iseq=133
+local variable names:
+  R1:message
+  R2:who
+  R3:&
+  R4:level
+file: test_channel.rb
+   62 000 OP_ENTER	1:1:0:0:0:0:0
+   62 004 OP_JMP		010
+   62 007 OP_JMP		012
+   62 010 OP_LOADNIL	R2			; R2:who
+   63 012 OP_LOADSELF	R5		
+   63 014 OP_SEND	R5	:instance	0
+   63 018 OP_SEND	R5	:level_error?	0
+   63 022 OP_JMPIF	R5	030	
+   64 026 OP_LOADNIL	R5		
+   64 028 OP_RETURN	R5		
+   67 030 OP_JMPNOT	R2	060		; R2:who
+   68 034 OP_STRING	R5	L(0)	; 
+   68 037 OP_MOVE	R6	R2		; R2:who
+   68 040 OP_STRCAT	R5	
+   68 042 OP_STRING	R6	L(1)	; : 
+   68 045 OP_STRCAT	R5	
+   68 047 OP_MOVE	R6	R1		; R1:message
+   68 050 OP_STRCAT	R5	
+   68 052 OP_STRING	R6	L(0)	; 
+   68 055 OP_STRCAT	R5	
+   68 057 OP_MOVE	R1	R5		; R1:message
+   71 060 OP_LOADSELF	R5		
+   71 062 OP_SEND	R5	:instance	0
+   71 066 OP_GETCONST	R6	:LEVEL_ERROR
+   71 069 OP_SEND	R5	:level_text	1
+   71 073 OP_MOVE	R4	R5		; R4:level
+   72 076 OP_LOADSELF	R5		
+   72 078 OP_SEND	R5	:instance	0
+   72 082 OP_SEND	R5	:out	0
+   72 086 OP_STRING	R6	L(2)	; [
+   72 089 OP_GETCONST	R7	:Time
+   72 092 OP_SEND	R7	:now	0
+   72 096 OP_SEND	R7	:to_s	0
+   72 100 OP_STRCAT	R6	
+   72 102 OP_STRING	R7	L(3)	; ][
+   72 105 OP_STRCAT	R6	
+   72 107 OP_MOVE	R7	R4		; R4:level
+   72 110 OP_STRCAT	R6	
+   72 112 OP_STRING	R7	L(4)	; ] 
+   72 115 OP_STRCAT	R6	
+   72 117 OP_MOVE	R7	R1		; R1:message
+   72 120 OP_STRCAT	R6	
+   72 122 OP_STRING	R7	L(5)	; 
+
+   72 125 OP_STRCAT	R6	
+   72 127 OP_SEND	R5	:write	1
+   72 131 OP_RETURN	R5		
+
+irep 0x13a6143c0 nregs=9 nlocals=5 pools=6 syms=9 reps=0 iseq=133
+local variable names:
+  R1:message
+  R2:who
+  R3:&
+  R4:level
+file: test_channel.rb
+   75 000 OP_ENTER	1:1:0:0:0:0:0
+   75 004 OP_JMP		010
+   75 007 OP_JMP		012
+   75 010 OP_LOADNIL	R2			; R2:who
+   76 012 OP_LOADSELF	R5		
+   76 014 OP_SEND	R5	:instance	0
+   76 018 OP_SEND	R5	:level_debug?	0
+   76 022 OP_JMPIF	R5	030	
+   77 026 OP_LOADNIL	R5		
+   77 028 OP_RETURN	R5		
+   80 030 OP_JMPNOT	R2	060		; R2:who
+   81 034 OP_STRING	R5	L(0)	; 
+   81 037 OP_MOVE	R6	R2		; R2:who
+   81 040 OP_STRCAT	R5	
+   81 042 OP_STRING	R6	L(1)	; : 
+   81 045 OP_STRCAT	R5	
+   81 047 OP_MOVE	R6	R1		; R1:message
+   81 050 OP_STRCAT	R5	
+   81 052 OP_STRING	R6	L(0)	; 
+   81 055 OP_STRCAT	R5	
+   81 057 OP_MOVE	R1	R5		; R1:message
+   84 060 OP_LOADSELF	R5		
+   84 062 OP_SEND	R5	:instance	0
+   84 066 OP_GETCONST	R6	:LEVEL_DEBUG
+   84 069 OP_SEND	R5	:level_text	1
+   84 073 OP_MOVE	R4	R5		; R4:level
+   85 076 OP_LOADSELF	R5		
+   85 078 OP_SEND	R5	:instance	0
+   85 082 OP_SEND	R5	:out	0
+   85 086 OP_STRING	R6	L(2)	; [
+   85 089 OP_GETCONST	R7	:Time
+   85 092 OP_SEND	R7	:now	0
+   85 096 OP_SEND	R7	:to_s	0
+   85 100 OP_STRCAT	R6	
+   85 102 OP_STRING	R7	L(3)	; ][
+   85 105 OP_STRCAT	R6	
+   85 107 OP_MOVE	R7	R4		; R4:level
+   85 110 OP_STRCAT	R6	
+   85 112 OP_STRING	R7	L(4)	; ] 
+   85 115 OP_STRCAT	R6	
+   85 117 OP_MOVE	R7	R1		; R1:message
+   85 120 OP_STRCAT	R6	
+   85 122 OP_STRING	R7	L(5)	; 
+
+   85 125 OP_STRCAT	R6	
+   85 127 OP_SEND	R5	:print	1
+   85 131 OP_RETURN	R5		
+
+irep 0x13a614730 nregs=4 nlocals=2 pools=0 syms=2 reps=0 iseq=16
+local variable names:
+  R1:&
+file: test_channel.rb
+   88 000 OP_ENTER	0:0:0:0:0:0:0
+   89 004 OP_LOADSELF	R2		
+   89 006 OP_SEND	R2	:instance	0
+   89 010 OP_SEND	R2	:level	0
+   89 014 OP_RETURN	R2		
+
+irep 0x13a6147e0 nregs=7 nlocals=3 pools=0 syms=2 reps=0 iseq=22
+local variable names:
+  R1:level
+  R2:&
+file: test_channel.rb
+   92 000 OP_ENTER	1:0:0:0:0:0:0
+   93 004 OP_MOVE	R3	R1		; R1:level
+   93 007 OP_LOADSELF	R4		
+   93 009 OP_SEND	R4	:instance	0
+   93 013 OP_MOVE	R5	R3	
+   93 016 OP_SEND	R4	:level=	1
+   93 020 OP_RETURN	R3		
+
+00001 NODE_SCOPE:
+00001   NODE_BEGIN:
+00001     NODE_MODULE:
+00175       :Rakie
+00175       body:
+00001         NODE_BEGIN:
+00002           NODE_CLASS:
+00174             :Channel
+00174             body:
+00002               NODE_BEGIN:
+00003                 NODE_FCALL:
+00003                   NODE_SELF
+00003                   method='attr_accessor' (1072)
+00003                   args:
+00003                     NODE_SYM :delegate (1279)
+00005                 NODE_ASGN:
+00005                   lhs:
+00005                     NODE_CONST DEFAULT_BUFFER_SIZE
+00005                   rhs:
+00005                     NODE_CALL(.):
+00005                       NODE_INT 512 base 10
+00005                       method='*' (4)
+00005                       args:
+00005                         NODE_INT 1024 base 10
+00007                 NODE_DEF:
+00007                   initialize
+00007                   local variables:
+00007                     io, delegate, &
+00007                   mandatory args:
+00007                     NODE_ARG io
+00007                   optional args:
+00007                     delegate=
+00007                       NODE_NIL
+00007                 NODE_ARGS_TAIL:
+00008                   NODE_BEGIN:
+00008                     NODE_ASGN:
+00008                       lhs:
+00008                         NODE_IVAR @io
+00008                       rhs:
+00008                         NODE_LVAR io
+00009                     NODE_ASGN:
+00009                       lhs:
+00009                         NODE_IVAR @read_buffer
+00009                       rhs:
+00009                         NODE_CALL(.):
+00009                           NODE_CONST String
+00009                           method='new' (128)
+00010                     NODE_ASGN:
+00010                       lhs:
+00010                         NODE_IVAR @write_buffer
+00010                       rhs:
+00010                         NODE_CALL(.):
+00010                           NODE_CONST String
+00010                           method='new' (128)
+00011                     NODE_ASGN:
+00011                       lhs:
+00011                         NODE_IVAR @write_task
+00011                       rhs:
+00011                         NODE_ARRAY:
+00012                     NODE_ASGN:
+00012                       lhs:
+00012                         NODE_IVAR @delegate
+00012                       rhs:
+00012                         NODE_LVAR delegate
+00013                     NODE_CALL(.):
+00013                       NODE_CONST Selector
+00013                       method='push' (280)
+00013                       args:
+00013                         NODE_LVAR io
+00013                         NODE_SELF
+00013                         NODE_COLON2:
+00013                           NODE_CONST Selector
+00013                           ::READ_EVENT
+00016                 NODE_DEF:
+00016                   on_read
+00016                   local variables:
+00016                     io, &, origin_len, e, len
+00016                   mandatory args:
+00016                     NODE_ARG io
+00016                 NODE_ARGS_TAIL:
+00018                   NODE_BEGIN:
+00018                     NODE_RESCUE:
+00036                       body:
+00018                         NODE_BEGIN:
+00018                           NODE_ASGN:
+00018                             lhs:
+00018                               NODE_LVAR origin_len
+00018                             rhs:
+00018                               NODE_CALL(.):
+00018                                 NODE_IVAR @read_buffer
+00018                                 method='length' (536)
+00020                           NODE_CALL(.):
+00020                             NODE_IVAR @read_buffer
+00020                             method='<<' (45)
+00020                             args:
+00020                               NODE_CALL(.):
+00020                                 NODE_CONST Channel
+00020                                 method='recv_nonblock' (1087)
+00020                                 args:
+00020                                   NODE_LVAR io
+00020                                   NODE_CONST DEFAULT_BUFFER_SIZE
+00022                           NODE_IF:
+00025                             cond:
+00022                               NODE_CALL(.):
+00022                                 NODE_LVAR origin_len
+00022                                 method='==' (47)
+00022                                 args:
+00022                                   NODE_CALL(.):
+00022                                     NODE_IVAR @read_buffer
+00022                                     method='length' (536)
+00025                             then:
+00023                               NODE_BEGIN:
+00023                                 NODE_CALL(.):
+00023                                   NODE_CONST Log
+00023                                   method='debug' (85472648)
+00023                                   args:
+00023                                     NODE_DSTR:
+00023                                       NODE_STR "Channel " len 8
+00023                                       NODE_BEGIN:
+00023                                         NODE_LVAR io
+00023                                       NODE_STR " closed by remote" len 17
+00024                                 NODE_IF:
+00024                                   cond:
+00024                                     NODE_CALL(.):
+00024                                       NODE_LVAR io
+00024                                       method='eof?' (215)
+00024                                   then:
+00024                                     NODE_RETURN:
+00024                                       NODE_COLON2:
+00024                                         NODE_CONST Selector
+00024                                         ::HANDLE_FAILED
+00036                       rescue:
+00036                         handle classes:
+00027                           NODE_CONST Exception
+00036                         exc_var:
+00027                           NODE_LVAR e
+00036                         rescue body:
+00029                           NODE_BEGIN:
+00029                             NODE_IF:
+00032                               cond:
+00029                                 NODE_CALL(.):
+00029                                   NODE_IVAR @delegate
+00029                                   method='!=' (37)
+00029                                   args:
+00029                                     NODE_NIL
+00032                               then:
+00030                                 NODE_BEGIN:
+00030                                   NODE_CALL(.):
+00030                                     NODE_IVAR @delegate
+00030                                     method='on_recv' (1287)
+00030                                     args:
+00030                                       NODE_SELF
+00030                                       NODE_IVAR @read_buffer
+00031                                   NODE_ASGN:
+00031                                     lhs:
+00031                                       NODE_IVAR @read_buffer
+00031                                     rhs:
+00031                                       NODE_CALL(.):
+00031                                         NODE_CONST String
+00031                                         method='new' (128)
+00034                             NODE_CALL(.):
+00034                               NODE_CONST Log
+00034                               method='debug' (85472648)
+00034                               args:
+00034                                 NODE_DSTR:
+00034                                   NODE_STR "Channel error " len 14
+00034                                   NODE_BEGIN:
+00034                                     NODE_LVAR io
+00034                                   NODE_STR ": " len 2
+00034                                   NODE_BEGIN:
+00034                                     NODE_LVAR e
+00034                                   NODE_STR "" len 0
+00035                             NODE_RETURN:
+00035                               NODE_COLON2:
+00035                                 NODE_CONST Selector
+00035                                 ::HANDLE_FAILED
+00038                     NODE_IF:
+00047                       cond:
+00038                         NODE_CALL(.):
+00038                           NODE_IVAR @delegate
+00038                           method='!=' (37)
+00038                           args:
+00038                             NODE_NIL
+00047                       then:
+00039                         NODE_BEGIN:
+00039                           NODE_CALL(.):
+00039                             NODE_CONST Log
+00039                             method='debug' (85472648)
+00039                             args:
+00039                               NODE_STR "Channel handle on_recv" len 22
+00040                           NODE_ASGN:
+00040                             lhs:
+00040                               NODE_LVAR len
+00040                             rhs:
+00040                               NODE_CALL(.):
+00040                                 NODE_IVAR @delegate
+00040                                 method='on_recv' (1287)
+00040                                 args:
+00040                                   NODE_SELF
+00040                                   NODE_IVAR @read_buffer
+00042                           NODE_IF:
+00044                             cond:
+00042                               NODE_CALL(.):
+00042                                 NODE_LVAR len
+00042                                 method='>' (9)
+00042                                 args:
+00042                                   NODE_CALL(.):
+00042                                     NODE_IVAR @read_buffer
+00042                                     method='length' (536)
+00044                             then:
+00043                               NODE_BEGIN:
+00043                                 NODE_ASGN:
+00043                                   lhs:
+00043                                     NODE_LVAR len
+00043                                   rhs:
+00043                                     NODE_CALL(.):
+00043                                       NODE_IVAR @read_buffer
+00043                                       method='length' (536)
+00046                           NODE_ASGN:
+00046                             lhs:
+00046                               NODE_IVAR @read_buffer
+00046                             rhs:
+00046                               NODE_CALL(.):
+00046                                 NODE_IVAR @read_buffer
+00046                                 method='[]' (54)
+00046                                 args:
+00046                                   NODE_DOT2:
+00046                                     NODE_LVAR len
+00046                                     NODE_NEGATE:
+00046                                       NODE_INT 1 base 10
+00049                     NODE_RETURN:
+00049                       NODE_COLON2:
+00049                         NODE_CONST Selector
+00049                         ::HANDLE_CONTINUED
+00052                 NODE_DEF:
+00052                   handle_write
+00052                   local variables:
+00052                     len, &, task
+00052                   mandatory args:
+00052                     NODE_ARG len
+00052                 NODE_ARGS_TAIL:
+00053                   NODE_BEGIN:
+00053                     NODE_ASGN:
+00053                       lhs:
+00053                         NODE_LVAR task
+00053                       rhs:
+00053                         NODE_CALL(.):
+00053                           NODE_IVAR @write_task
+00053                           method='[]' (54)
+00053                           args:
+00053                             NODE_INT 0 base 10
+00055                     NODE_WHILE:
+00070                       cond:
+00055                         NODE_CALL(.):
+00055                           NODE_LVAR len
+00055                           method='>' (9)
+00055                           args:
+00055                             NODE_INT 0 base 10
+00070                       body:
+00056                         NODE_BEGIN:
+00056                           NODE_IF:
+00059                             cond:
+00056                               NODE_CALL(.):
+00056                                 NODE_LVAR len
+00056                                 method='<' (8)
+00056                                 args:
+00056                                   NODE_LVAR task
+00059                             then:
+00057                               NODE_BEGIN:
+00057                                 NODE_ASGN:
+00057                                   lhs:
+00057                                     NODE_CALL(.):
+00057                                       NODE_IVAR @write_task
+00057                                       method='[]' (54)
+00057                                       args:
+00057                                         NODE_INT 0 base 10
+00057                                   rhs:
+00057                                     NODE_CALL(.):
+00057                                       NODE_LVAR task
+00057                                       method='-' (6)
+00057                                       args:
+00057                                         NODE_LVAR len
+00058                                 NODE_RETURN:
+00061                           NODE_OP_ASGN:
+00061                             lhs:
+00061                               NODE_LVAR len
+00061                             op='-' (6)
+00061                             NODE_LVAR task
+00062                           NODE_CALL(.):
+00062                             NODE_IVAR @write_task
+00062                             method='shift' (435)
+00064                           NODE_IF:
+00067                             cond:
+00064                               NODE_CALL(.):
+00064                                 NODE_IVAR @delegate
+00064                                 method='!=' (37)
+00064                                 args:
+00064                                   NODE_NIL
+00067                             then:
+00065                               NODE_BEGIN:
+00065                                 NODE_CALL(.):
+00065                                   NODE_IVAR @delegate
+00065                                   method='on_send' (1289)
+00065                                   args:
+00065                                     NODE_SELF
+00066                                 NODE_CALL(.):
+00066                                   NODE_CONST Log
+00066                                   method='debug' (85472648)
+00066                                   args:
+00066                                     NODE_STR "Channel handle on_send" len 22
+00069                           NODE_ASGN:
+00069                             lhs:
+00069                               NODE_LVAR task
+00069                             rhs:
+00069                               NODE_CALL(.):
+00069                                 NODE_IVAR @write_task
+00069                                 method='[]' (54)
+00069                                 args:
+00069                                   NODE_INT 0 base 10
+00073                 NODE_DEF:
+00073                   on_write
+00073                   local variables:
+00073                     io, &, len, offset
+00073                   mandatory args:
+00073                     NODE_ARG io
+00073                 NODE_ARGS_TAIL:
+00074                   NODE_BEGIN:
+00074                     NODE_ASGN:
+00074                       lhs:
+00074                         NODE_LVAR len
+00074                       rhs:
+00074                         NODE_INT 0 base 10
+00075                     NODE_ASGN:
+00075                       lhs:
+00075                         NODE_LVAR offset
+00075                       rhs:
+00075                         NODE_INT 0 base 10
+00078                     NODE_RESCUE:
+00089                       body:
+00078                         NODE_BEGIN:
+00078                           NODE_IF:
+00082                             cond:
+00078                               NODE_CALL(.):
+00078                                 NODE_CALL(.):
+00078                                   NODE_IVAR @write_buffer
+00078                                   method='length' (536)
+00078                                 method='>' (9)
+00078                                 args:
+00078                                   NODE_INT 0 base 10
+00082                             then:
+00079                               NODE_BEGIN:
+00079                                 NODE_ASGN:
+00079                                   lhs:
+00079                                     NODE_LVAR len
+00079                                   rhs:
+00079                                     NODE_CALL(.):
+00079                                       NODE_CONST Channel
+00079                                       method='send_nonblock' (1290)
+00079                                       args:
+00079                                         NODE_LVAR io
+00079                                         NODE_IVAR @write_buffer
+00080                                 NODE_OP_ASGN:
+00080                                   lhs:
+00080                                     NODE_LVAR offset
+00080                                   op='+' (5)
+00080                                   NODE_LVAR len
+00081                                 NODE_ASGN:
+00081                                   lhs:
+00081                                     NODE_IVAR @write_buffer
+00081                                   rhs:
+00081                                     NODE_CALL(.):
+00081                                       NODE_IVAR @write_buffer
+00081                                       method='[]' (54)
+00081                                       args:
+00081                                         NODE_DOT2:
+00081                                           NODE_LVAR len
+00081                                           NODE_NEGATE:
+00081                                             NODE_INT 1 base 10
+00084                           NODE_CALL(.):
+00084                             NODE_CONST Log
+00084                             method='debug' (85472648)
+00084                             args:
+00084                               NODE_DSTR:
+00084                                 NODE_STR "Channel write " len 14
+00084                                 NODE_BEGIN:
+00084                                   NODE_LVAR len
+00084                                 NODE_STR " bytes finished" len 15
+00089                       rescue:
+00089                         rescue body:
+00087                           NODE_BEGIN:
+00087                             NODE_CALL(.):
+00087                               NODE_CONST Log
+00087                               method='debug' (85472648)
+00087                               args:
+00087                                 NODE_DSTR:
+00087                                   NODE_STR "Channel write failed " len 21
+00087                                   NODE_BEGIN:
+00087                                     NODE_LVAR io
+00087                                   NODE_STR "" len 0
+00088                             NODE_RETURN:
+00088                               NODE_COLON2:
+00088                                 NODE_CONST Selector
+00088                                 ::HANDLE_FAILED
+00091                     NODE_CALL(.):
+00091                       NODE_SELF
+00091                       method='handle_write' (1288)
+00091                       args:
+00091                         NODE_LVAR offset
+00093                     NODE_IF:
+00095                       cond:
+00093                         NODE_CALL(.):
+00093                           NODE_CALL(.):
+00093                             NODE_IVAR @write_buffer
+00093                             method='length' (536)
+00093                           method='==' (47)
+00093                           args:
+00093                             NODE_INT 0 base 10
+00095                       then:
+00094                         NODE_BEGIN:
+00094                           NODE_RETURN:
+00094                             NODE_COLON2:
+00094                               NODE_CONST Selector
+00094                               ::HANDLE_FINISHED
+00097                     NODE_RETURN:
+00097                       NODE_COLON2:
+00097                         NODE_CONST Selector
+00097                         ::HANDLE_CONTINUED
+00100                 NODE_DEF:
+00100                   on_detach
+00100                   local variables:
+00100                     io, &
+00100                   mandatory args:
+00100                     NODE_ARG io
+00100                 NODE_ARGS_TAIL:
+00101                   NODE_BEGIN:
+00101                     NODE_IF:
+00103                       cond:
+00101                         NODE_CALL(.):
+00101                           NODE_LVAR io
+00101                           method='closed?' (632)
+00103                       then:
+00102                         NODE_BEGIN:
+00102                           NODE_RETURN:
+00106                     NODE_RESCUE:
+00111                       body:
+00106                         NODE_BEGIN:
+00106                           NODE_CALL(.):
+00106                             NODE_LVAR io
+00106                             method='close' (379)
+00111                       rescue:
+00111                         rescue body:
+00109                           NODE_BEGIN:
+00109                             NODE_CALL(.):
+00109                               NODE_CONST Log
+00109                               method='debug' (85472648)
+00109                               args:
+00109                                 NODE_STR "Channel is already closed" len 25
+00110                             NODE_RETURN:
+00113                     NODE_IF:
+00115                       cond:
+00113                         NODE_IVAR @delegate
+00115                       then:
+00114                         NODE_BEGIN:
+00114                           NODE_CALL(.):
+00114                             NODE_IVAR @delegate
+00114                             method='on_close' (1291)
+00114                             args:
+00114                               NODE_SELF
+00117                     NODE_CALL(.):
+00117                       NODE_CONST Log
+00117                       method='debug' (85472648)
+00117                       args:
+00117                         NODE_STR "Channel close ok" len 16
+00120                 NODE_DEF:
+00120                   read
+00120                   local variables:
+00120                     size, &, data
+00120                   mandatory args:
+00120                     NODE_ARG size
+00120                 NODE_ARGS_TAIL:
+00121                   NODE_BEGIN:
+00121                     NODE_IF:
+00123                       cond:
+00121                         NODE_CALL(.):
+00121                           NODE_SELF
+00121                           method='eof?' (215)
+00123                       then:
+00122                         NODE_BEGIN:
+00122                           NODE_RETURN:
+00122                             NODE_STR "" len 0
+00125                     NODE_IF:
+00127                       cond:
+00125                         NODE_CALL(.):
+00125                           NODE_LVAR size
+00125                           method='>' (9)
+00125                           args:
+00125                             NODE_CALL(.):
+00125                               NODE_FCALL:
+00125                                 NODE_SELF
+00125                                 method='data' (209)
+00125                               method='length' (536)
+00127                       then:
+00126                         NODE_BEGIN:
+00126                           NODE_ASGN:
+00126                             lhs:
+00126                               NODE_LVAR size
+00126                             rhs:
+00126                               NODE_CALL(.):
+00126                                 NODE_FCALL:
+00126                                   NODE_SELF
+00126                                   method='data' (209)
+00126                                 method='length' (536)
+00129                     NODE_ASGN:
+00129                       lhs:
+00129                         NODE_LVAR data
+00129                       rhs:
+00129                         NODE_CALL(.):
+00129                           NODE_IVAR @read_buffer
+00129                           method='[]' (54)
+00129                           args:
+00129                             NODE_DOT2:
+00129                               NODE_INT 0 base 10
+00129                               NODE_BEGIN:
+00129                                 NODE_CALL(.):
+00129                                   NODE_LVAR size
+00129                                   method='-' (6)
+00129                                   args:
+00129                                     NODE_INT 1 base 10
+00130                     NODE_ASGN:
+00130                       lhs:
+00130                         NODE_IVAR @read_buffer
+00130                       rhs:
+00130                         NODE_CALL(.):
+00130                           NODE_IVAR @read_buffer
+00130                           method='[]' (54)
+00130                           args:
+00130                             NODE_DOT2:
+00130                               NODE_LVAR size
+00130                               NODE_NEGATE:
+00130                                 NODE_INT 1 base 10
+00132                     NODE_RETURN:
+00132                       NODE_LVAR data
+00135                 NODE_DEF:
+00135                   write
+00135                   local variables:
+00135                     data, &
+00135                   mandatory args:
+00135                     NODE_ARG data
+00135                 NODE_ARGS_TAIL:
+00136                   NODE_BEGIN:
+00136                     NODE_IF:
+00138                       cond:
+00136                         NODE_CALL(.):
+00136                           NODE_IVAR @io
+00136                           method='closed?' (632)
+00138                       then:
+00137                         NODE_BEGIN:
+00137                           NODE_RETURN:
+00137                             NODE_NEGATE:
+00137                               NODE_INT 1 base 10
+00140                     NODE_CALL(.):
+00140                       NODE_IVAR @write_buffer
+00140                       method='<<' (45)
+00140                       args:
+00140                         NODE_LVAR data
+00141                     NODE_CALL(.):
+00141                       NODE_IVAR @write_task
+00141                       method='<<' (45)
+00141                       args:
+00141                         NODE_CALL(.):
+00141                           NODE_LVAR data
+00141                           method='length' (536)
+00143                     NODE_CALL(.):
+00143                       NODE_CONST Log
+00143                       method='debug' (85472648)
+00143                       args:
+00143                         NODE_DSTR:
+00143                           NODE_STR "write buffer append size: " len 26
+00143                           NODE_BEGIN:
+00143                             NODE_CALL(.):
+00143                               NODE_LVAR data
+00143                               method='length' (536)
+00143                           NODE_STR "" len 0
+00145                     NODE_CALL(.):
+00145                       NODE_CONST Selector
+00145                       method='modify' (1266)
+00145                       args:
+00145                         NODE_IVAR @io
+00145                         NODE_SELF
+00145                         NODE_BEGIN:
+00145                           NODE_CALL(.):
+00145                             NODE_COLON2:
+00145                               NODE_CONST Selector
+00145                               ::READ_EVENT
+00145                             method='|' (35)
+00145                             args:
+00145                               NODE_COLON2:
+00145                                 NODE_CONST Selector
+00145                                 ::WRITE_EVENT
+00147                     NODE_RETURN:
+00147                       NODE_INT 0 base 10
+00150                 NODE_DEF:
+00150                   close
+00150                   local variables:
+00150                     &
+00151                   NODE_BEGIN:
+00151                     NODE_IF:
+00153                       cond:
+00151                         NODE_CALL(.):
+00151                           NODE_IVAR @io
+00151                           method='closed?' (632)
+00153                       then:
+00152                         NODE_BEGIN:
+00152                           NODE_RETURN:
+00152                             NODE_NIL
+00155                     NODE_CALL(.):
+00155                       NODE_CONST Selector
+00155                       method='delete' (509)
+00155                       args:
+00155                         NODE_IVAR @io
+00156                     NODE_RETURN:
+00156                       NODE_NIL
+00159                 NODE_DEF:
+00159                   eof?
+00159                   local variables:
+00159                     &
+00160                   NODE_BEGIN:
+00160                     NODE_CALL(.):
+00160                       NODE_IVAR @read_buffer
+00160                       method='empty?' (514)
+00163                 NODE_DEF:
+00163                   closed?
+00163                   local variables:
+00163                     &
+00164                   NODE_BEGIN:
+00164                     NODE_CALL(.):
+00164                       NODE_IVAR @io
+00164                       method='closed?' (632)
+00167                 NODE_SDEF:
+00167                   NODE_SELF
+00167                   :recv_nonblock
+00167                     mandatory args:
+00167                       NODE_ARG io
+00167                       NODE_ARG size
+00167                   NODE_ARGS_TAIL:
+00168                   NODE_BEGIN:
+00168                     NODE_CALL(.):
+00168                       NODE_LVAR io
+00168                       method='recv' (286)
+00168                       args:
+00168                         NODE_LVAR size
+00168                         NODE_COLON2:
+00168                           NODE_CONST Socket
+00168                           ::MSG_DONTWAIT
+00171                 NODE_SDEF:
+00171                   NODE_SELF
+00171                   :send_nonblock
+00171                     mandatory args:
+00171                       NODE_ARG io
+00171                       NODE_ARG message
+00171                   NODE_ARGS_TAIL:
+00172                   NODE_BEGIN:
+00172                     NODE_CALL(.):
+00172                       NODE_LVAR io
+00172                       method='send' (292)
+00172                       args:
+00172                         NODE_LVAR message
+00172                         NODE_CALL(.):
+00172                           NODE_COLON2:
+00172                             NODE_CONST Socket
+00172                             ::MSG_NOSIGNAL
+00172                           method='|' (35)
+00172                           args:
+00172                             NODE_COLON2:
+00172                               NODE_CONST Socket
+00172                               ::MSG_DONTWAIT
+irep 0x13a6131e0 nregs=2 nlocals=1 pools=0 syms=1 reps=1 iseq=11
+file: test_channel.rb
+    1 000 OP_LOADNIL	R1		
+    1 002 OP_MODULE	R1	:Rakie
+    1 005 OP_EXEC	R1	I(0:0x13a613290)
+    1 008 OP_RETURN	R1		
+    1 010 OP_STOP
+
+irep 0x13a613290 nregs=3 nlocals=1 pools=0 syms=1 reps=1 iseq=12
+file: test_channel.rb
+    2 000 OP_LOADNIL	R1		
+    2 002 OP_LOADNIL	R2		
+    2 004 OP_CLASS	R1	:Channel
+    2 007 OP_EXEC	R1	I(0:0x13a614f80)
+    2 010 OP_RETURN	R1		
+
+irep 0x13a614f80 nregs=4 nlocals=1 pools=0 syms=15 reps=12 iseq=127
+file: test_channel.rb
+    3 000 OP_LOADSELF	R1		
+    3 002 OP_LOADSYM	R2	:delegate	
+    3 005 OP_SEND	R1	:attr_accessor	1
+    5 009 OP_LOADI16	R1	512	
+    5 013 OP_LOADI16	R2	1024	
+    5 017 OP_MUL	R1	R2
+    5 019 OP_SETCONST	:DEFAULT_BUFFER_SIZE	R1
+    7 022 OP_TCLASS	R1		
+    7 024 OP_METHOD	R2	I(0:0x13a615230)
+    7 027 OP_DEF	R1	:initialize
+   16 030 OP_TCLASS	R1		
+   16 032 OP_METHOD	R2	I(1:0x13a6153b0)
+   16 035 OP_DEF	R1	:on_read
+   52 038 OP_TCLASS	R1		
+   52 040 OP_METHOD	R2	I(2:0x13a615600)
+   52 043 OP_DEF	R1	:handle_write
+   73 046 OP_TCLASS	R1		
+   73 048 OP_METHOD	R2	I(3:0x13a615c10)
+   73 051 OP_DEF	R1	:on_write
+  100 054 OP_TCLASS	R1		
+  100 056 OP_METHOD	R2	I(4:0x13a615d40)
+  100 059 OP_DEF	R1	:on_detach
+  120 062 OP_TCLASS	R1		
+  120 064 OP_METHOD	R2	I(5:0x13a616210)
+  120 067 OP_DEF	R1	:read
+  135 070 OP_TCLASS	R1		
+  135 072 OP_METHOD	R2	I(6:0x13a616400)
+  135 075 OP_DEF	R1	:write
+  150 078 OP_TCLASS	R1		
+  150 080 OP_METHOD	R2	I(7:0x13a616670)
+  150 083 OP_DEF	R1	:close
+  159 086 OP_TCLASS	R1		
+  159 088 OP_METHOD	R2	I(8:0x13a6167a0)
+  159 091 OP_DEF	R1	:eof?
+  163 094 OP_TCLASS	R1		
+  163 096 OP_METHOD	R2	I(9:0x13a6168c0)
+  163 099 OP_DEF	R1	:closed?
+  167 102 OP_LOADSELF	R1		
+  167 104 OP_SCLASS	R1	
+  167 106 OP_METHOD	R2	I(10:0x13a616970)
+  167 109 OP_DEF	R1	:recv_nonblock
+  171 112 OP_LOADSELF	R1		
+  171 114 OP_SCLASS	R1	
+  171 116 OP_METHOD	R2	I(11:0x13a616a70)
+  171 119 OP_DEF	R1	:send_nonblock
+  171 122 OP_LOADSYM	R1	:send_nonblock	
+  171 125 OP_RETURN	R1		
+
+irep 0x13a615230 nregs=9 nlocals=4 pools=0 syms=10 reps=0 iseq=70
+local variable names:
+  R1:io
+  R2:delegate
+  R3:&
+file: test_channel.rb
+    7 000 OP_ENTER	1:1:0:0:0:0:0
+    7 004 OP_JMP		010
+    7 007 OP_JMP		012
+    7 010 OP_LOADNIL	R2			; R2:delegate
+    8 012 OP_MOVE	R4	R1		; R1:io
+    8 015 OP_SETIV	@io	R4
+    9 018 OP_GETCONST	R4	:String
+    9 021 OP_SEND	R4	:new	0
+    9 025 OP_SETIV	@read_buffer	R4
+   10 028 OP_GETCONST	R4	:String
+   10 031 OP_SEND	R4	:new	0
+   10 035 OP_SETIV	@write_buffer	R4
+   11 038 OP_ARRAY	R4	0	
+   11 041 OP_SETIV	@write_task	R4
+   12 044 OP_MOVE	R4	R2		; R2:delegate
+   12 047 OP_SETIV	@delegate	R4
+   13 050 OP_GETCONST	R4	:Selector
+   13 053 OP_MOVE	R5	R1		; R1:io
+   13 056 OP_LOADSELF	R6		
+   13 058 OP_GETCONST	R7	:Selector
+   13 061 OP_GETMCNST	R7	R7::READ_EVENT
+   13 064 OP_SEND	R4	:push	3
+   13 068 OP_RETURN	R4		
+
+irep 0x13a6153b0 nregs=11 nlocals=6 pools=6 syms=19 reps=0 iseq=284
+local variable names:
+  R1:io
+  R2:&
+  R3:origin_len
+  R4:e
+  R5:len
+catch type: rescue   begin: 0004 end: 0099 target: 0102
+file: test_channel.rb
+   16 000 OP_ENTER	1:0:0:0:0:0:0
+   18 004 OP_GETIV	R6	@read_buffer
+   18 007 OP_SEND	R6	:length	0
+   18 011 OP_MOVE	R3	R6		; R3:origin_len
+   20 014 OP_GETIV	R6	@read_buffer
+   20 017 OP_GETCONST	R7	:Channel
+   20 020 OP_MOVE	R8	R1		; R1:io
+   20 023 OP_GETCONST	R9	:DEFAULT_BUFFER_SIZE
+   20 026 OP_SEND	R7	:recv_nonblock	2
+   20 030 OP_SEND	R6	:<<	1
+   22 034 OP_MOVE	R6	R3		; R3:origin_len
+   22 037 OP_GETIV	R7	@read_buffer
+   22 040 OP_SEND	R7	:length	0
+   22 044 OP_EQ		R6	R7
+   22 046 OP_JMPNOT	R6	097	
+   23 050 OP_GETCONST	R6	:Log
+   23 053 OP_STRING	R7	L(0)	; Channel 
+   23 056 OP_MOVE	R8	R1		; R1:io
+   23 059 OP_STRCAT	R7	
+   23 061 OP_STRING	R8	L(1)	;  closed by remote
+   23 064 OP_STRCAT	R7	
+   23 066 OP_SEND	R6	:debug	1
+   24 070 OP_MOVE	R6	R1		; R1:io
+   24 073 OP_SEND	R6	:eof?	0
+   24 077 OP_JMPNOT	R6	092	
+   24 081 OP_GETCONST	R6	:Selector
+   24 084 OP_GETMCNST	R6	R6::HANDLE_FAILED
+   24 087 OP_RETURN_BLK	R6		
+   24 089 OP_JMP		094
+   24 092 OP_LOADNIL	R6		
+   24 094 OP_JMP		099
+   24 097 OP_LOADNIL	R6		
+   24 099 OP_JMP		198
+   24 102 OP_EXCEPT	R6		
+   27 104 OP_GETCONST	R7	:Exception
+   27 107 OP_RESCUE	R6	R7
+   27 110 OP_JMPIF	R7	117	
+   27 114 OP_JMP		196
+   27 117 OP_MOVE	R4	R6		; R4:e
+   29 120 OP_GETIV	R6	@delegate
+   29 123 OP_LOADNIL	R7		
+   29 125 OP_SEND	R6	:!=	1
+   29 129 OP_JMPNOT	R6	155	
+   30 133 OP_GETIV	R6	@delegate
+   30 136 OP_LOADSELF	R7		
+   30 138 OP_GETIV	R8	@read_buffer
+   30 141 OP_SEND	R6	:on_recv	2
+   31 145 OP_GETCONST	R6	:String
+   31 148 OP_SEND	R6	:new	0
+   31 152 OP_SETIV	@read_buffer	R6
+   34 155 OP_GETCONST	R6	:Log
+   34 158 OP_STRING	R7	L(2)	; Channel error 
+   34 161 OP_MOVE	R8	R1		; R1:io
+   34 164 OP_STRCAT	R7	
+   34 166 OP_STRING	R8	L(3)	; : 
+   34 169 OP_STRCAT	R7	
+   34 171 OP_MOVE	R8	R4		; R4:e
+   34 174 OP_STRCAT	R7	
+   34 176 OP_STRING	R8	L(4)	; 
+   34 179 OP_STRCAT	R7	
+   34 181 OP_SEND	R6	:debug	1
+   35 185 OP_GETCONST	R6	:Selector
+   35 188 OP_GETMCNST	R6	R6::HANDLE_FAILED
+   35 191 OP_RETURN_BLK	R6		
+   35 193 OP_JMP		198
+   35 196 OP_RAISEIF	R6		
+   38 198 OP_GETIV	R6	@delegate
+   38 201 OP_LOADNIL	R7		
+   38 203 OP_SEND	R6	:!=	1
+   38 207 OP_JMPNOT	R6	276	
+   39 211 OP_GETCONST	R6	:Log
+   39 214 OP_STRING	R7	L(5)	; Channel handle on_recv
+   39 217 OP_SEND	R6	:debug	1
+   40 221 OP_GETIV	R6	@delegate
+   40 224 OP_LOADSELF	R7		
+   40 226 OP_GETIV	R8	@read_buffer
+   40 229 OP_SEND	R6	:on_recv	2
+   40 233 OP_MOVE	R5	R6		; R5:len
+   42 236 OP_GETIV	R7	@read_buffer
+   42 239 OP_SEND	R7	:length	0
+   42 243 OP_GT		R6	R7
+   42 245 OP_JMPNOT	R6	259	
+   43 249 OP_GETIV	R6	@read_buffer
+   43 252 OP_SEND	R6	:length	0
+   43 256 OP_MOVE	R5	R6		; R5:len
+   46 259 OP_GETIV	R6	@read_buffer
+   46 262 OP_MOVE	R7	R5		; R5:len
+   46 265 OP_LOADI__1	R8		
+   46 267 OP_RANGE_INC	R7
+   46 269 OP_SEND	R6	:[]	1
+   46 273 OP_SETIV	@read_buffer	R6
+   49 276 OP_GETCONST	R6	:Selector
+   49 279 OP_GETMCNST	R6	R6::HANDLE_CONTINUED
+   49 282 OP_RETURN	R6		
+
+irep 0x13a615600 nregs=9 nlocals=4 pools=1 syms=9 reps=0 iseq=132
+local variable names:
+  R1:len
+  R2:&
+  R3:task
+file: test_channel.rb
+   52 000 OP_ENTER	1:0:0:0:0:0:0
+   53 004 OP_GETIV	R4	@write_task
+   53 007 OP_LOADI_0	R5		
+   53 009 OP_SEND	R4	:[]	1
+   53 013 OP_MOVE	R3	R4		; R3:task
+   55 016 OP_JMP		117
+   56 019 OP_MOVE	R4	R1		; R1:len
+   56 022 OP_MOVE	R5	R3		; R3:task
+   56 025 OP_LT		R4	R5
+   56 027 OP_JMPNOT	R4	055	
+   57 031 OP_MOVE	R4	R3		; R3:task
+   57 034 OP_MOVE	R5	R1		; R1:len
+   57 037 OP_SUB	R4	R5
+   57 039 OP_GETIV	R5	@write_task
+   57 042 OP_LOADI_0	R6		
+   57 044 OP_MOVE	R7	R4	
+   57 047 OP_SEND	R5	:[]=	2
+   58 051 OP_LOADNIL	R4		
+   58 053 OP_RETURN_BLK	R4		
+   61 055 OP_MOVE	R4	R1		; R1:len
+   61 058 OP_MOVE	R5	R3		; R3:task
+   61 061 OP_SUB	R4	R5
+   61 063 OP_MOVE	R1	R4		; R1:len
+   62 066 OP_GETIV	R4	@write_task
+   62 069 OP_SEND	R4	:shift	0
+   64 073 OP_GETIV	R4	@delegate
+   64 076 OP_LOADNIL	R5		
+   64 078 OP_SEND	R4	:!=	1
+   64 082 OP_JMPNOT	R4	105	
+   65 086 OP_GETIV	R4	@delegate
+   65 089 OP_LOADSELF	R5		
+   65 091 OP_SEND	R4	:on_send	1
+   66 095 OP_GETCONST	R4	:Log
+   66 098 OP_STRING	R5	L(0)	; Channel handle on_send
+   66 101 OP_SEND	R4	:debug	1
+   69 105 OP_GETIV	R4	@write_task
+   69 108 OP_LOADI_0	R5		
+   69 110 OP_SEND	R4	:[]	1
+   69 114 OP_MOVE	R3	R4		; R3:task
+   55 117 OP_MOVE	R4	R1		; R1:len
+   55 120 OP_LOADI_0	R5		
+   55 122 OP_GT		R4	R5
+   55 124 OP_JMPIF	R4	019	
+   55 128 OP_LOADNIL	R4		
+   55 130 OP_RETURN	R4		
+
+irep 0x13a615c10 nregs=9 nlocals=5 pools=4 syms=13 reps=0 iseq=178
+local variable names:
+  R1:io
+  R2:&
+  R3:len
+  R4:offset
+catch type: rescue   begin: 0008 end: 0087 target: 0090
+file: test_channel.rb
+   73 000 OP_ENTER	1:0:0:0:0:0:0
+   74 004 OP_LOADI_0	R3			; R3:len
+   75 006 OP_LOADI_0	R4			; R4:offset
+   78 008 OP_GETIV	R5	@write_buffer
+   78 011 OP_SEND	R5	:length	0
+   78 015 OP_LOADI_0	R6		
+   78 017 OP_GT		R5	R6
+   78 019 OP_JMPNOT	R5	067	
+   79 023 OP_GETCONST	R5	:Channel
+   79 026 OP_MOVE	R6	R1		; R1:io
+   79 029 OP_GETIV	R7	@write_buffer
+   79 032 OP_SEND	R5	:send_nonblock	2
+   79 036 OP_MOVE	R3	R5		; R3:len
+   80 039 OP_MOVE	R5	R4		; R4:offset
+   80 042 OP_MOVE	R6	R3		; R3:len
+   80 045 OP_ADD	R5	R6
+   80 047 OP_MOVE	R4	R5		; R4:offset
+   81 050 OP_GETIV	R5	@write_buffer
+   81 053 OP_MOVE	R6	R3		; R3:len
+   81 056 OP_LOADI__1	R7		
+   81 058 OP_RANGE_INC	R6
+   81 060 OP_SEND	R5	:[]	1
+   81 064 OP_SETIV	@write_buffer	R5
+   84 067 OP_GETCONST	R5	:Log
+   84 070 OP_STRING	R6	L(0)	; Channel write 
+   84 073 OP_MOVE	R7	R3		; R3:len
+   84 076 OP_STRCAT	R6	
+   84 078 OP_STRING	R7	L(1)	;  bytes finished
+   84 081 OP_STRCAT	R6	
+   84 083 OP_SEND	R5	:debug	1
+   84 087 OP_JMP		138
+   84 090 OP_EXCEPT	R5		
+   84 092 OP_GETCONST	R6	:StandardError
+   84 095 OP_RESCUE	R5	R6
+   84 098 OP_JMPIF	R6	105	
+   84 102 OP_JMP		136
+   87 105 OP_GETCONST	R5	:Log
+   87 108 OP_STRING	R6	L(2)	; Channel write failed 
+   87 111 OP_MOVE	R7	R1		; R1:io
+   87 114 OP_STRCAT	R6	
+   87 116 OP_STRING	R7	L(3)	; 
+   87 119 OP_STRCAT	R6	
+   87 121 OP_SEND	R5	:debug	1
+   88 125 OP_GETCONST	R5	:Selector
+   88 128 OP_GETMCNST	R5	R5::HANDLE_FAILED
+   88 131 OP_RETURN_BLK	R5		
+   88 133 OP_JMP		138
+   88 136 OP_RAISEIF	R5		
+   91 138 OP_LOADSELF	R5		
+   91 140 OP_MOVE	R6	R4		; R4:offset
+   91 143 OP_SEND	R5	:handle_write	1
+   93 147 OP_GETIV	R5	@write_buffer
+   93 150 OP_SEND	R5	:length	0
+   93 154 OP_LOADI_0	R6		
+   93 156 OP_EQ		R5	R6
+   93 158 OP_JMPNOT	R5	170	
+   94 162 OP_GETCONST	R5	:Selector
+   94 165 OP_GETMCNST	R5	R5::HANDLE_FINISHED
+   94 168 OP_RETURN	R5		
+   97 170 OP_GETCONST	R5	:Selector
+   97 173 OP_GETMCNST	R5	R5::HANDLE_CONTINUED
+   97 176 OP_RETURN	R5		
+
+irep 0x13a615d40 nregs=6 nlocals=3 pools=2 syms=7 reps=0 iseq=91
+local variable names:
+  R1:io
+  R2:&
+catch type: rescue   begin: 0019 end: 0026 target: 0029
+file: test_channel.rb
+  100 000 OP_ENTER	1:0:0:0:0:0:0
+  101 004 OP_MOVE	R3	R1		; R1:io
+  101 007 OP_SEND	R3	:closed?	0
+  101 011 OP_JMPNOT	R3	019	
+  102 015 OP_LOADNIL	R3		
+  102 017 OP_RETURN	R3		
+  106 019 OP_MOVE	R3	R1		; R1:io
+  106 022 OP_SEND	R3	:close	0
+  106 026 OP_JMP		063
+  106 029 OP_EXCEPT	R3		
+  106 031 OP_GETCONST	R4	:StandardError
+  106 034 OP_RESCUE	R3	R4
+  106 037 OP_JMPIF	R4	044	
+  106 041 OP_JMP		061
+  109 044 OP_GETCONST	R3	:Log
+  109 047 OP_STRING	R4	L(0)	; Channel is already closed
+  109 050 OP_SEND	R3	:debug	1
+  110 054 OP_LOADNIL	R3		
+  110 056 OP_RETURN_BLK	R3		
+  110 058 OP_JMP		063
+  110 061 OP_RAISEIF	R3		
+  113 063 OP_GETIV	R3	@delegate
+  113 066 OP_JMPNOT	R3	079	
+  114 070 OP_GETIV	R3	@delegate
+  114 073 OP_LOADSELF	R4		
+  114 075 OP_SEND	R3	:on_close	1
+  117 079 OP_GETCONST	R3	:Log
+  117 082 OP_STRING	R4	L(1)	; Channel close ok
+  117 085 OP_SEND	R3	:debug	1
+  117 089 OP_RETURN	R3		
+
+irep 0x13a616210 nregs=9 nlocals=4 pools=1 syms=5 reps=0 iseq=90
+local variable names:
+  R1:size
+  R2:&
+  R3:data
+file: test_channel.rb
+  120 000 OP_ENTER	1:0:0:0:0:0:0
+  121 004 OP_LOADSELF	R4		
+  121 006 OP_SEND	R4	:eof?	0
+  121 010 OP_JMPNOT	R4	019	
+  122 014 OP_STRING	R4	L(0)	; 
+  122 017 OP_RETURN	R4		
+  125 019 OP_MOVE	R4	R1		; R1:size
+  125 022 OP_LOADSELF	R5		
+  125 024 OP_SEND	R5	:data	0
+  125 028 OP_SEND	R5	:length	0
+  125 032 OP_GT		R4	R5
+  125 034 OP_JMPNOT	R4	051	
+  126 038 OP_LOADSELF	R4		
+  126 040 OP_SEND	R4	:data	0
+  126 044 OP_SEND	R4	:length	0
+  126 048 OP_MOVE	R1	R4		; R1:size
+  129 051 OP_GETIV	R4	@read_buffer
+  129 054 OP_LOADI_0	R5		
+  129 056 OP_MOVE	R6	R1		; R1:size
+  129 059 OP_SUBI	R6	1
+  129 062 OP_RANGE_INC	R5
+  129 064 OP_SEND	R4	:[]	1
+  129 068 OP_MOVE	R3	R4		; R3:data
+  130 071 OP_GETIV	R4	@read_buffer
+  130 074 OP_MOVE	R5	R1		; R1:size
+  130 077 OP_LOADI__1	R6		
+  130 079 OP_RANGE_INC	R5
+  130 081 OP_SEND	R4	:[]	1
+  130 085 OP_SETIV	@read_buffer	R4
+  132 088 OP_RETURN	R3			; R3:data
+
+irep 0x13a616400 nregs=9 nlocals=3 pools=2 syms=13 reps=0 iseq=99
+local variable names:
+  R1:data
+  R2:&
+file: test_channel.rb
+  135 000 OP_ENTER	1:0:0:0:0:0:0
+  136 004 OP_GETIV	R3	@io
+  136 007 OP_SEND	R3	:closed?	0
+  136 011 OP_JMPNOT	R3	019	
+  137 015 OP_LOADI__1	R3		
+  137 017 OP_RETURN	R3		
+  140 019 OP_GETIV	R3	@write_buffer
+  140 022 OP_MOVE	R4	R1		; R1:data
+  140 025 OP_SEND	R3	:<<	1
+  141 029 OP_GETIV	R3	@write_task
+  141 032 OP_MOVE	R4	R1		; R1:data
+  141 035 OP_SEND	R4	:length	0
+  141 039 OP_SEND	R3	:<<	1
+  143 043 OP_GETCONST	R3	:Log
+  143 046 OP_STRING	R4	L(0)	; write buffer append size: 
+  143 049 OP_MOVE	R5	R1		; R1:data
+  143 052 OP_SEND	R5	:length	0
+  143 056 OP_STRCAT	R4	
+  143 058 OP_STRING	R5	L(1)	; 
+  143 061 OP_STRCAT	R4	
+  143 063 OP_SEND	R3	:debug	1
+  145 067 OP_GETCONST	R3	:Selector
+  145 070 OP_GETIV	R4	@io
+  145 073 OP_LOADSELF	R5		
+  145 075 OP_GETCONST	R6	:Selector
+  145 078 OP_GETMCNST	R6	R6::READ_EVENT
+  145 081 OP_GETCONST	R7	:Selector
+  145 084 OP_GETMCNST	R7	R7::WRITE_EVENT
+  145 087 OP_SEND	R6	:|	1
+  145 091 OP_SEND	R3	:modify	3
+  147 095 OP_LOADI_0	R3		
+  147 097 OP_RETURN	R3		
+
+irep 0x13a616670 nregs=5 nlocals=2 pools=0 syms=4 reps=0 iseq=33
+local variable names:
+  R1:&
+file: test_channel.rb
+  150 000 OP_ENTER	0:0:0:0:0:0:0
+  151 004 OP_GETIV	R2	@io
+  151 007 OP_SEND	R2	:closed?	0
+  151 011 OP_JMPNOT	R2	019	
+  152 015 OP_LOADNIL	R2		
+  152 017 OP_RETURN	R2		
+  155 019 OP_GETCONST	R2	:Selector
+  155 022 OP_GETIV	R3	@io
+  155 025 OP_SEND	R2	:delete	1
+  156 029 OP_LOADNIL	R2		
+  156 031 OP_RETURN	R2		
+
+irep 0x13a6167a0 nregs=4 nlocals=2 pools=0 syms=2 reps=0 iseq=13
+local variable names:
+  R1:&
+file: test_channel.rb
+  159 000 OP_ENTER	0:0:0:0:0:0:0
+  160 004 OP_GETIV	R2	@read_buffer
+  160 007 OP_SEND	R2	:empty?	0
+  160 011 OP_RETURN	R2		
+
+irep 0x13a6168c0 nregs=4 nlocals=2 pools=0 syms=2 reps=0 iseq=13
+local variable names:
+  R1:&
+file: test_channel.rb
+  163 000 OP_ENTER	0:0:0:0:0:0:0
+  164 004 OP_GETIV	R2	@io
+  164 007 OP_SEND	R2	:closed?	0
+  164 011 OP_RETURN	R2		
+
+irep 0x13a616970 nregs=8 nlocals=4 pools=0 syms=3 reps=0 iseq=22
+local variable names:
+  R1:io
+  R2:size
+  R3:&
+file: test_channel.rb
+  167 000 OP_ENTER	2:0:0:0:0:0:0
+  168 004 OP_MOVE	R4	R1		; R1:io
+  168 007 OP_MOVE	R5	R2		; R2:size
+  168 010 OP_GETCONST	R6	:Socket
+  168 013 OP_GETMCNST	R6	R6::MSG_DONTWAIT
+  168 016 OP_SEND	R4	:recv	2
+  168 020 OP_RETURN	R4		
+
+irep 0x13a616a70 nregs=9 nlocals=4 pools=0 syms=5 reps=0 iseq=32
+local variable names:
+  R1:io
+  R2:message
+  R3:&
+file: test_channel.rb
+  171 000 OP_ENTER	2:0:0:0:0:0:0
+  172 004 OP_MOVE	R4	R1		; R1:io
+  172 007 OP_MOVE	R5	R2		; R2:message
+  172 010 OP_GETCONST	R6	:Socket
+  172 013 OP_GETMCNST	R6	R6::MSG_NOSIGNAL
+  172 016 OP_GETCONST	R7	:Socket
+  172 019 OP_GETMCNST	R7	R7::MSG_DONTWAIT
+  172 022 OP_SEND	R6	:|	1
+  172 026 OP_SEND	R4	:send	2
+  172 030 OP_RETURN	R4		
+
+00001 NODE_SCOPE:
+00001   NODE_BEGIN:
+00001     NODE_MODULE:
+00030       :Rakie
+00030       body:
+00001         NODE_BEGIN:
+00002           NODE_CLASS:
+00029             :TCPChannel
+00029             super:
+00002               NODE_CONST Channel
+00029             body:
+00003               NODE_BEGIN:
+00003                 NODE_ASGN:
+00003                   lhs:
+00003                     NODE_CONST LOCAL_HOST
+00003                   rhs:
+00003                     NODE_STR "127.0.0.1" len 9
+00012                 NODE_DEF:
+00012                   initialize
+00012                   local variables:
+00012                     host, port, delegate, socket, &, sock_addr, e
+00012                   optional args:
+00012                     host=
+00012                       NODE_CONST LOCAL_HOST
+00012                     port=
+00012                       NODE_INT 3001 base 10
+00012                     delegate=
+00012                       NODE_NIL
+00012                     socket=
+00012                       NODE_NIL
+00012                 NODE_ARGS_TAIL:
+00013                   NODE_BEGIN:
+00013                     NODE_IF:
+00022                       cond:
+00013                         NODE_CALL(.):
+00013                           NODE_LVAR socket
+00013                           method='==' (47)
+00013                           args:
+00013                             NODE_NIL
+00022                       then:
+00014                         NODE_BEGIN:
+00014                           NODE_ASGN:
+00014                             lhs:
+00014                               NODE_LVAR socket
+00014                             rhs:
+00014                               NODE_CALL(.):
+00014                                 NODE_CONST Socket
+00014                                 method='new' (128)
+00014                                 args:
+00014                                   NODE_COLON2:
+00014                                     NODE_CONST Socket
+00014                                     ::AF_INET
+00014                                   NODE_COLON2:
+00014                                     NODE_CONST Socket
+00014                                     ::SOCK_STREAM
+00015                           NODE_ASGN:
+00015                             lhs:
+00015                               NODE_LVAR sock_addr
+00015                             rhs:
+00015                               NODE_CALL(.):
+00015                                 NODE_CONST Socket
+00015                                 method='pack_sockaddr_in' (1157)
+00015                                 args:
+00015                                   NODE_LVAR port
+00015                                   NODE_LVAR host
+00018                           NODE_RESCUE:
+00021                             body:
+00018                               NODE_BEGIN:
+00018                                 NODE_CALL(.):
+00018                                   NODE_LVAR socket
+00018                                   method='connect' (637)
+00018                                   args:
+00018                                     NODE_LVAR sock_addr
+00021                             rescue:
+00021                               handle classes:
+00019                                 NODE_CONST Exception
+00021                               exc_var:
+00019                                 NODE_LVAR e
+00021                               rescue body:
+00020                                 NODE_BEGIN:
+00020                                   NODE_CALL(.):
+00020                                     NODE_CONST Log
+00020                                     method='debug' (85472648)
+00020                                     args:
+00020                                       NODE_DSTR:
+00020                                         NODE_STR "Connect failed: " len 16
+00020                                         NODE_BEGIN:
+00020                                           NODE_LVAR e
+00020                                         NODE_STR "" len 0
+00024                     NODE_ASGN:
+00024                       lhs:
+00024                         NODE_IVAR @port
+00024                       rhs:
+00024                         NODE_LVAR port
+00025                     NODE_ASGN:
+00025                       lhs:
+00025                         NODE_IVAR @host
+00025                       rhs:
+00025                         NODE_LVAR host
+00027                     NODE_SUPER:
+00027                       args:
+00027                         NODE_LVAR socket
+00027                         NODE_LVAR delegate
+irep 0x13a614be0 nregs=2 nlocals=1 pools=0 syms=1 reps=1 iseq=11
+file: test_channel.rb
+    1 000 OP_LOADNIL	R1		
+    1 002 OP_MODULE	R1	:Rakie
+    1 005 OP_EXEC	R1	I(0:0x13a616d50)
+    1 008 OP_RETURN	R1		
+    1 010 OP_STOP
+
+irep 0x13a616d50 nregs=3 nlocals=1 pools=0 syms=2 reps=1 iseq=13
+file: test_channel.rb
+    2 000 OP_LOADNIL	R1		
+    2 002 OP_GETCONST	R2	:Channel
+    2 005 OP_CLASS	R1	:TCPChannel
+    2 008 OP_EXEC	R1	I(0:0x13a617000)
+    2 011 OP_RETURN	R1		
+
+irep 0x13a617000 nregs=3 nlocals=1 pools=1 syms=2 reps=1 iseq=19
+file: test_channel.rb
+    3 000 OP_STRING	R1	L(0)	; 127.0.0.1
+    3 003 OP_SETCONST	:LOCAL_HOST	R1
+   12 006 OP_TCLASS	R1		
+   12 008 OP_METHOD	R2	I(0:0x13a6172c0)
+   12 011 OP_DEF	R1	:initialize
+   12 014 OP_LOADSYM	R1	:initialize	
+   12 017 OP_RETURN	R1		
+
+irep 0x13a6172c0 nregs=12 nlocals=8 pools=2 syms=12 reps=0 iseq=167
+local variable names:
+  R1:host
+  R2:port
+  R3:delegate
+  R4:socket
+  R5:&
+  R6:sock_addr
+  R7:e
+catch type: rescue   begin: 0082 end: 0092 target: 0095
+file: test_channel.rb
+   12 000 OP_ENTER	0:4:0:0:0:0:0
+   12 004 OP_JMP		019
+   12 007 OP_JMP		022
+   12 010 OP_JMP		029
+   12 013 OP_JMP		031
+   12 016 OP_JMP		033
+   12 019 OP_GETCONST	R1	:LOCAL_HOST	; R1:host
+   12 022 OP_LOADI16	R8	3001	
+   12 026 OP_MOVE	R2	R8		; R2:port
+   12 029 OP_LOADNIL	R3			; R3:delegate
+   12 031 OP_LOADNIL	R4			; R4:socket
+   13 033 OP_MOVE	R8	R4		; R4:socket
+   13 036 OP_LOADNIL	R9		
+   13 038 OP_EQ		R8	R9
+   13 040 OP_JMPNOT	R8	138	
+   14 044 OP_GETCONST	R8	:Socket
+   14 047 OP_GETCONST	R9	:Socket
+   14 050 OP_GETMCNST	R9	R9::AF_INET
+   14 053 OP_GETCONST	R10	:Socket
+   14 056 OP_GETMCNST	R10	R10::SOCK_STREAM
+   14 059 OP_SEND	R8	:new	2
+   14 063 OP_MOVE	R4	R8		; R4:socket
+   15 066 OP_GETCONST	R8	:Socket
+   15 069 OP_MOVE	R9	R2		; R2:port
+   15 072 OP_MOVE	R10	R1		; R1:host
+   15 075 OP_SEND	R8	:pack_sockaddr_in	2
+   15 079 OP_MOVE	R6	R8		; R6:sock_addr
+   18 082 OP_MOVE	R8	R4		; R4:socket
+   18 085 OP_MOVE	R9	R6		; R6:sock_addr
+   18 088 OP_SEND	R8	:connect	1
+   18 092 OP_JMP		138
+   18 095 OP_EXCEPT	R8		
+   19 097 OP_GETCONST	R9	:Exception
+   19 100 OP_RESCUE	R8	R9
+   19 103 OP_JMPIF	R9	110	
+   19 107 OP_JMP		136
+   19 110 OP_MOVE	R7	R8		; R7:e
+   20 113 OP_GETCONST	R8	:Log
+   20 116 OP_STRING	R9	L(0)	; Connect failed: 
+   20 119 OP_MOVE	R10	R7		; R7:e
+   20 122 OP_STRCAT	R9	
+   20 124 OP_STRING	R10	L(1)	; 
+   20 127 OP_STRCAT	R9	
+   20 129 OP_SEND	R8	:debug	1
+   20 133 OP_JMP		138
+   20 136 OP_RAISEIF	R8		
+   24 138 OP_MOVE	R8	R2		; R2:port
+   24 141 OP_SETIV	@port	R8
+   25 144 OP_MOVE	R8	R1		; R1:host
+   25 147 OP_SETIV	@host	R8
+   27 150 OP_ARGARY	R9	0:0:0:0 (0)
+   27 154 OP_MOVE	R9	R4		; R4:socket
+   27 157 OP_MOVE	R10	R3		; R3:delegate
+   27 160 OP_LOADNIL	R11		
+   27 162 OP_SUPER	R8	2
+   27 165 OP_RETURN	R8		
+
+00002 NODE_SCOPE:
+00006   local variables:
+00006     n, c
+00002   NODE_BEGIN:
+00002     NODE_CALL(.):
+00002       NODE_COLON2:
+00002         NODE_CONST Rakie
+00002         ::Scheduler
+00002       method='dispatch' (1238)
+00004       args:
+00004       block:
+00002         NOD[2021-12-24 15:58:29 +0800][DEBUG] Connect failed: connect
+E_BLOCK:
+00004           body:
+00003             NODE_BEGIN:
+00003               NODE_FCALL:
+00003                 NODE_SELF
+00003                 method='puts' (281)
+00003                 args:
+00003                   NODE_STR "123" len 3
+00006     NODE_ASGN:
+00006       lhs:
+00006         NODE_LVAR n
+00006       rhs:
+00006         NODE_INT 1 base 10
+00007     NODE_ASGN:
+00007       lhs:
+00007         NODE_LVAR c
+00007       rhs:
+00007         NODE_CALL(.):
+00007           NODE_COLON2:
+00007             NODE_CONST Rakie
+00007             ::TCPChannel
+00007           method='new' (128)
+00009     NODE_CALL(.):
+00009       NODE_COLON2:
+00009         NODE_CONST Rakie
+00009         ::Scheduler
+00009       method='run' (324595712)
+00014       args:
+00014       block:
+00009         NODE_BLOCK:
+00014           body:
+00010             NODE_BEGIN:
+00010               NODE_ASGN:
+00010                 lhs:
+00010                   NODE_LVAR c
+00010                 rhs:
+00010                   NODE_CALL(.):
+00010                     NODE_LVAR n
+00010                     method='clone' (378)
+00012               NODE_CALL(.):
+00012                 NODE_COLON2:
+00012                   NODE_CONST Rakie
+00012                   ::Scheduler
+00012                 method='dispatch' (1238)
+00012                 args:
+00012                 block:
+00012                   NODE_BLOCK:
+00012                     body:
+00012                       NODE_BEGIN:
+00012                         NODE_FCALL:
+00012                           NODE_SELF
+00012                           method='puts' (281)
+00012                           args:
+00012                             NODE_DSTR:
+00012                               NODE_STR "Start for " len 10
+00012                               NODE_BEGIN:
+00012                                 NODE_LVAR c
+00012                               NODE_STR " times" len 6
+00013               NODE_OP_ASGN:
+00013                 lhs:
+00013                   NODE_LVAR n
+00013                 op='+' (5)
+00013                 NODE_INT 1 base 10
+irep 0x13a617210 nregs=5 nlocals=3 pools=0 syms=6 reps=2 iseq=44
+local variable names:
+  R1:n
+  R2:c
+file: test_channel.rb
+    2 000 OP_GETCONST	R3	:Rakie
+    2 003 OP_GETMCNST	R3	R3::Scheduler
+    2 006 OP_BLOCK	R4	I(0:0x13a614db0)
+    2 009 OP_SENDB	R3	:dispatch	0
+    6 013 OP_LOADI_1	R1			; R1:n
+    7 015 OP_GETCONST	R3	:Rakie
+    7 018 OP_GETMCNST	R3	R3::TCPChannel
+    7 021 OP_SEND	R3	:new	0
+    7 025 OP_MOVE	R2	R3		; R2:c
+    9 028 OP_GETCONST	R3	:Rakie
+    9 031 OP_GETMCNST	R3	R3::Scheduler
+    9 034 OP_BLOCK	R4	I(1:0x13a614e90)
+    9 037 OP_SENDB	R3	:run	0
+    9 041 OP_RETURN	R3		
+    9 043 OP_STOP
+
+irep 0x13a614db0 nregs=5 nlocals=2 pools=1 syms=1 reps=0 iseq=15
+local variable names:
+  R1:&
+file: test_channel.rb
+    2 000 OP_ENTER	0:0:0:0:0:0:0
+    3 004 OP_LOADSELF	R2		
+    3 006 OP_STRING	R3	L(0)	; 123
+    3 009 OP_SEND	R2	:puts	1
+    3 013 OP_RETURN	R2		
+
+irep 0x13a614e90 nregs=5 nlocals=2 pools=0 syms=4 reps=1 iseq=42
+local variable names:
+  R1:&
+file: test_channel.rb
+    9 000 OP_ENTER	0:0:0:0:0:0:0
+   10 004 OP_GETUPVAR	R2	1	0
+   10 008 OP_SEND	R2	:clone	0
+   10 012 OP_SETUPVAR	R2	2	0
+   12 016 OP_GETCONST	R2	:Rakie
+   12 019 OP_GETMCNST	R2	R2::Scheduler
+   12 022 OP_BLOCK	R3	I(0:0x13a614f10)
+   12 025 OP_SENDB	R2	:dispatch	0
+   13 029 OP_GETUPVAR	R2	1	0
+   13 033 OP_ADDI	R2	1
+   13 036 OP_SETUPVAR	R2	1	0
+   13 040 OP_RETURN	R2		
+
+irep 0x13a614f10 nregs=5 nlocals=2 pools=2 syms=1 reps=0 iseq=26
+local variable names:
+  R1:&
+file: test_channel.rb
+   12 000 OP_ENTER	0:0:0:0:0:0:0
+   12 004 OP_LOADSELF	R2		
+   12 006 OP_STRING	R3	L(0)	; Start for 
+   12 009 OP_GETUPVAR	R4	2	1
+   12 013 OP_STRCAT	R3	
+   12 015 OP_STRING	R4	L(1)	;  times
+   12 018 OP_STRCAT	R3	
+   12 020 OP_SEND	R2	:puts	1
+   12 024 OP_RETURN	R2		
+
+123
+[2021-12-24 15:58:29 +0800][DEBUG] Event selecting ...
+[2021-12-24 15:58:29 +0800][DEBUG] Event selecting ...
+[2021-12-24 15:58:29 +0800][DEBUG] Event handling a with 7 to 1
+[2021-12-24 15:58:29 +0800][DEBUG] Event add all 7 to 1
+Start for 2 times
+[2021-12-24 15:58:29 +0800][DEBUG] Event selecting ...
+[2021-12-24 15:58:29 +0800][DEBUG] Event selecting ...
+[2021-12-24 15:58:29 +0800][DEBUG] Channel #<Socket:0x140021420> closed by remote
+[2021-12-24 15:58:29 +0800][DEBUG] Channel close ok
+[2021-12-24 15:58:29 +0800][DEBUG] Event close #<Socket:0x140021420>
+[2021-12-24 15:58:29 +0800][DEBUG] Event remove all #<Socket:0x140021420>
+Start for 3 times
+[2021-12-24 15:58:29 +0800][DEBUG] Event selecting ...
+Start for 4 times
+[2021-12-24 15:58:30 +0800][DEBUG] Event selecting ...

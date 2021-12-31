@@ -25,14 +25,14 @@ module Rakie
             next
           end
 
-          p "Running: #{task}"
+          # p "Running: #{task}"
 
           task.resume
         end
 
         @tasks.select! { |task| task.alive? }
 
-        p Time.now
+        # p Time.now
 
         Rakie::Selector.select
       end

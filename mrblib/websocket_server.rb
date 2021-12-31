@@ -37,7 +37,7 @@ module Rakie
     # @return bool
     def upgrade(request, response)
       if websocket_key = request.headers["sec-websocket-key"]
-        digest_key = Digest::SHA1.base64digest(websocket_key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
+        digest_key = Base64::encode([SHA1.sha1_hex(websocket_key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')])
 
         response.head.status = 101
         response.head.message = 'Switching Protocols'
