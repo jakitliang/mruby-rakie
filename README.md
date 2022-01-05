@@ -24,6 +24,10 @@ It works at many platforms and simple delpoyment.
 * macOS
 * Linux
 
+## Screenshots
+
+<img width="1005" alt="截屏2022-01-05 下午9 05 26" src="https://user-images.githubusercontent.com/18480287/148224298-545a9671-3dd8-4ef5-8941-a37fe96a6a4b.png">
+
 ## Notice
 
 Project is under construction.
