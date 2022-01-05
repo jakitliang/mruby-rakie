@@ -1,0 +1,323 @@
+[2022-01-05 21:03:27 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:27 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:27 +0800][DEBUG] Event handling a with 4 to 1
+[2022-01-05 21:03:27 +0800][DEBUG] Event add all 4 to 1
+Start for 1 times
+[2022-01-05 21:03:27 +0800][DEBUG] Event selecting ...
+Start for 2 times
+[2022-01-05 21:03:28 +0800][DEBUG] Event selecting ...
+Start for 3 times
+[2022-01-05 21:03:29 +0800][DEBUG] Event selecting ...
+Start for 4 times
+[2022-01-05 21:03:30 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] TCPServerChannel accept client 127.0.0.1:57303
+[2022-01-05 21:03:31 +0800][DEBUG] TCPServerChannel has delegate
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HTTPServer accept client: #<Rakie::TCPChannel:0x1280115a0>
+[2022-01-05 21:03:31 +0800][DEBUG] TCPServerChannel accept #<Rakie::TCPChannel:0x1280115a0>
+Start for 5 times
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event handling a with 8 to 1
+[2022-01-05 21:03:31 +0800][DEBUG] Event add all 8 to 1
+Start for 6 times
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source head ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source upgrade, websocket header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source connection, Upgrade header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source host, localhost:3001 header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source origin, http://localhost:3001 header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source pragma, no-cache header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source cache-control, no-cache header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source sec-websocket-key, IKPsi6ASNH1D3FvrMj2hGQ== header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source sec-websocket-version, 13 header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source sec-websocket-extensions, x-webkit-deflate-frame header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source user-agent, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15 header ok
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpRequest parse source header done
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpServer receive request: GET / HTTP/1.1
+upgrade: websocket
+connection: Upgrade
+host: localhost:3001
+origin: http://localhost:3001
+pragma: no-cache
+cache-control: no-cache
+sec-websocket-key: IKPsi6ASNH1D3FvrMj2hGQ==
+sec-websocket-version: 13
+sec-websocket-extensions: x-webkit-deflate-frame
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15
+
+
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpServer upgrade protocol
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::HttpServer response: HTTP/1.1 101 Switching Protocols
+connection: Upgrade
+upgrade: websocket
+sec-websocket-accept: aKvfSkxIzk6fsMr7/1bPo8eazos=
+server: rakie v0.0.1
+
+
+[2022-01-05 21:03:31 +0800][DEBUG] write buffer append size: 151
+Start for 7 times
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:31 +0800][DEBUG] Event modify all 8 to 3
+Start for 8 times
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:31 +0800][DEBUG] Channel write 151 bytes finished
+[2022-01-05 21:03:31 +0800][DEBUG] Client join #<Rakie::Websocket:0x130098dc0>
+[2022-01-05 21:03:31 +0800][DEBUG] Rakie::WebsocketServer accept client: #<Rakie::Websocket:0x130098dc0>
+[2022-01-05 21:03:31 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:31 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 9 times
+[2022-01-05 21:03:31 +0800][DEBUG] Event selecting ...
+Start for 10 times
+[2022-01-05 21:03:32 +0800][DEBUG] Event selecting ...
+Start for 11 times
+[2022-01-05 21:03:33 +0800][DEBUG] Event selecting ...
+Start for 12 times
+[2022-01-05 21:03:34 +0800][DEBUG] Event selecting ...
+Start for 13 times
+[2022-01-05 21:03:35 +0800][DEBUG] Event selecting ...
+Start for 14 times
+[2022-01-05 21:03:36 +0800][DEBUG] Event selecting ...
+Start for 15 times
+[2022-01-05 21:03:37 +0800][DEBUG] Event selecting ...
+Start for 16 times
+[2022-01-05 21:03:38 +0800][DEBUG] Event selecting ...
+Start for 17 times
+[2022-01-05 21:03:39 +0800][DEBUG] Event selecting ...
+Start for 18 times
+[2022-01-05 21:03:40 +0800][DEBUG] Event selecting ...
+Start for 19 times
+[2022-01-05 21:03:41 +0800][DEBUG] Event selecting ...
+Start for 20 times
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:42 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::Websocket recv len: 18
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::WebsocketMessage len: 12
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie! parse with 18
+[2022-01-05 21:03:42 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie!
+[2022-01-05 21:03:42 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie! with 24
+[2022-01-05 21:03:42 +0800][DEBUG] write buffer append size: 24
+Start for 21 times
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:42 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:42 +0800][DEBUG] Event modify all 8 to 3
+Start for 22 times
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:42 +0800][DEBUG] Channel write 24 bytes finished
+[2022-01-05 21:03:42 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:42 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 23 times
+[2022-01-05 21:03:42 +0800][DEBUG] Event selecting ...
+Start for 24 times
+[2022-01-05 21:03:43 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:44 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:44 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::Websocket recv len: 18
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::WebsocketMessage len: 12
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie! parse with 18
+[2022-01-05 21:03:44 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie!
+[2022-01-05 21:03:44 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie! with 24
+[2022-01-05 21:03:44 +0800][DEBUG] write buffer append size: 24
+Start for 25 times
+[2022-01-05 21:03:44 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:44 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:44 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:44 +0800][DEBUG] Event modify all 8 to 3
+Start for 26 times
+[2022-01-05 21:03:44 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:44 +0800][DEBUG] Channel write 24 bytes finished
+[2022-01-05 21:03:44 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:44 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 27 times
+[2022-01-05 21:03:44 +0800][DEBUG] Event selecting ...
+Start for 28 times
+[2022-01-05 21:03:45 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:46 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:46 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::Websocket recv len: 18
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::WebsocketMessage len: 12
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie! parse with 18
+[2022-01-05 21:03:46 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie!
+[2022-01-05 21:03:46 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie! with 24
+[2022-01-05 21:03:46 +0800][DEBUG] write buffer append size: 24
+Start for 29 times
+[2022-01-05 21:03:46 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:46 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:46 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:46 +0800][DEBUG] Event modify all 8 to 3
+Start for 30 times
+[2022-01-05 21:03:46 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:46 +0800][DEBUG] Channel write 24 bytes finished
+[2022-01-05 21:03:46 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:46 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 31 times
+[2022-01-05 21:03:46 +0800][DEBUG] Event selecting ...
+Start for 32 times
+[2022-01-05 21:03:47 +0800][DEBUG] Event selecting ...
+Start for 33 times
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:48 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::Websocket recv len: 20
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::WebsocketMessage len: 14
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie 1! parse with 20
+[2022-01-05 21:03:48 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie 1!
+[2022-01-05 21:03:48 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie 1! with 26
+[2022-01-05 21:03:48 +0800][DEBUG] write buffer append size: 26
+Start for 34 times
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:48 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:48 +0800][DEBUG] Event modify all 8 to 3
+Start for 35 times
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:48 +0800][DEBUG] Channel write 26 bytes finished
+[2022-01-05 21:03:48 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:48 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 36 times
+[2022-01-05 21:03:48 +0800][DEBUG] Event selecting ...
+Start for 37 times
+[2022-01-05 21:03:49 +0800][DEBUG] Event selecting ...
+Start for 38 times
+[2022-01-05 21:03:50 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:51 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:51 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::Websocket recv len: 20
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::WebsocketMessage len: 14
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie 2! parse with 20
+[2022-01-05 21:03:51 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie 2!
+[2022-01-05 21:03:51 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie 2! with 26
+[2022-01-05 21:03:51 +0800][DEBUG] write buffer append size: 26
+Start for 39 times
+[2022-01-05 21:03:51 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:51 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:51 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:51 +0800][DEBUG] Event modify all 8 to 3
+Start for 40 times
+[2022-01-05 21:03:51 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:51 +0800][DEBUG] Channel write 26 bytes finished
+[2022-01-05 21:03:51 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:51 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 41 times
+[2022-01-05 21:03:51 +0800][DEBUG] Event selecting ...
+Start for 42 times
+[2022-01-05 21:03:52 +0800][DEBUG] Event selecting ...
+Start for 43 times
+[2022-01-05 21:03:53 +0800][DEBUG] Event selecting ...
+Start for 44 times
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:54 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::Websocket recv len: 20
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::WebsocketMessage len: 14
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::Websocket receive message: Hello rakie 3! parse with 20
+[2022-01-05 21:03:54 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Hello rakie 3!
+[2022-01-05 21:03:54 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Hello rakie 3! with 26
+[2022-01-05 21:03:54 +0800][DEBUG] write buffer append size: 26
+Start for 45 times
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:54 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:54 +0800][DEBUG] Event modify all 8 to 3
+Start for 46 times
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:54 +0800][DEBUG] Channel write 26 bytes finished
+[2022-01-05 21:03:54 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:54 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 47 times
+[2022-01-05 21:03:54 +0800][DEBUG] Event selecting ...
+Start for 48 times
+[2022-01-05 21:03:55 +0800][DEBUG] Event selecting ...
+Start for 49 times
+[2022-01-05 21:03:56 +0800][DEBUG] Event selecting ...
+Start for 50 times
+[2022-01-05 21:03:57 +0800][DEBUG] Event selecting ...
+Start for 51 times
+[2022-01-05 21:03:58 +0800][DEBUG] Event selecting ...
+Start for 52 times
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:59 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::Websocket recv len: 10
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::WebsocketMessage len: 4
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::Websocket receive message: Bye! parse with 10
+[2022-01-05 21:03:59 +0800][DEBUG] Client #<Rakie::Websocket:0x130098dc0> message: Bye!
+[2022-01-05 21:03:59 +0800][DEBUG] Rakie::Websocket send: ÅYou said: Bye! with 16
+[2022-01-05 21:03:59 +0800][DEBUG] write buffer append size: 16
+Start for 53 times
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:59 +0800][DEBUG] Event handling a with 8 to 3
+[2022-01-05 21:03:59 +0800][DEBUG] Event modify all 8 to 3
+Start for 54 times
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:03:59 +0800][DEBUG] Channel write 16 bytes finished
+[2022-01-05 21:03:59 +0800][DEBUG] Channel handle on_send
+[2022-01-05 21:03:59 +0800][DEBUG] Event remove write #<Socket:0x128011840>
+Start for 55 times
+[2022-01-05 21:03:59 +0800][DEBUG] Event selecting ...
+Start for 56 times
+[2022-01-05 21:04:00 +0800][DEBUG] Event selecting ...
+Start for 57 times
+[2022-01-05 21:04:01 +0800][DEBUG] Event selecting ...
+Start for 58 times
+[2022-01-05 21:04:02 +0800][DEBUG] Event selecting ...
+Start for 59 times
+[2022-01-05 21:04:03 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:04:04 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:04:04 +0800][DEBUG] Channel handle on_recv
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::Websocket recv len: 6
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::WebsocketMessage parse source operation ok
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::WebsocketMessage len: 0
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::WebsocketMessage parse source len ok
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::WebsocketMessage parse source masking ok
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::WebsocketMessage parse source masked payload ok
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::Websocket receive message:  parse with 6
+[2022-01-05 21:04:04 +0800][DEBUG] Rakie::Websocket: op close
+Start for 60 times
+[2022-01-05 21:04:04 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:04:04 +0800][DEBUG] Event selecting ...
+[2022-01-05 21:04:04 +0800][DEBUG] Event handling a with 8 to 
+[2022-01-05 21:04:04 +0800][DEBUG] Event close #<Socket:0x128011840>
+[2022-01-05 21:04:04 +0800][DEBUG] Channel close ok
+[2022-01-05 21:04:04 +0800][DEBUG] Event remove all #<Socket:0x128011840>
+Start for 61 times
+[2022-01-05 21:04:04 +0800][DEBUG] Event selecting ...
+Start for 62 times
+[2022-01-05 21:04:05 +0800][DEBUG] Event selecting ...
+Start for 63 times
+[2022-01-05 21:04:06 +0800][DEBUG] Event selecting ...

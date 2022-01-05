@@ -10,19 +10,21 @@ module Rakie
     # @overload initialize(host, port)
     # @overload initialize(host, port, delegate, socket)
     def initialize(host: LOCAL_HOST, port: 3001, delegate: nil, socket: nil)
+      @port = port
+      @host = host
+
       if socket == nil
         socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM)
         sock_addr = Socket.pack_sockaddr_in(port, host)
 
         begin
           socket.connect(sock_addr)
+
         rescue Exception => e
           Log.debug "Connect failed: #{e}"
+          return
         end
       end
-
-      @port = port
-      @host = host
 
       super(socket, delegate)
     end

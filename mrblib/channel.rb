@@ -19,21 +19,22 @@ module Rakie
 
         @read_buffer << Channel.recv_nonblock(io, DEFAULT_BUFFER_SIZE)
 
-        Log.debug("Channel got data: #{@read_buffer}")
+        # Log.debug("Channel got data: #{@read_buffer}")
 
         if origin_len == @read_buffer.length
-          Log.debug("Channel #{io} closed by remote")
-          return Selector::HANDLE_FAILED if io.eof?
+          raise Errno::ECONNRESET
         end
+
+      rescue Errno::ECONNRESET => e
+        @read_buffer = String.new # Reset buffer
+        Log.debug("Channel #{io} closed by remote #{io}: #{e}")
+
+        return Selector::HANDLE_FAILED
 
       rescue Exception => e
-        # Process the last message on exception
-        if @delegate != nil
-          @delegate.on_recv(self, @read_buffer)
-          @read_buffer = String.new # Reset buffer
-        end
-
+        @read_buffer = String.new # Reset buffer
         Log.debug("Channel error #{io}: #{e}")
+
         return Selector::HANDLE_FAILED
       end
 
@@ -120,7 +121,7 @@ module Rakie
     end
 
     def read(size)
-      if self.eof?
+      if @read_buffer.size == 0
         return ""
       end
 
@@ -156,10 +157,6 @@ module Rakie
 
       Selector.delete(@io)
       return nil
-    end
-
-    def eof?
-      @read_buffer.empty?
     end
 
     def closed?

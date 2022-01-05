@@ -19,7 +19,7 @@ module Rakie
       @host = host
       @port = port
 
-      @channel = TCPServerChannel.new(host, port, self)
+      @channel = TCPServerChannel.new(host: host, port: port, delegate: self)
 
       # @type [Hash{Channel=>Session}]
       @sessions = {}
@@ -58,11 +58,12 @@ module Rakie
 
         if upgrade = request.headers["upgrade"]
           if websocket_delegate = @opt[:websocket_delegate]
-            websocket_delegate.upgrade(request, response)
             Log.debug("Rakie::HttpServer upgrade protocol")
+            websocket_delegate.upgrade(request, response)
           end
 
         elsif @delegate != nil
+          Log::debug('Rakie::HttpServer delegate do handle')
           @delegate.handle(request, response)
 
         else
@@ -78,7 +79,7 @@ module Rakie
           response.headers["content-length"] = response.content.length
         end
 
-        response.headers["server"] = Rakie.full_version_s
+        response.headers["server"] = 'rakie v0.0.1'
         session.responses << response
         response_data = response.to_s
 

@@ -11,7 +11,7 @@ class Client
   end
 
   def on_recv(channel, data)
-    p data
+    Rakie::Log.debug("Client recv message: #{data}")
 
     @c.write(data)
 
@@ -19,11 +19,11 @@ class Client
   end
 
   def on_send(channel)
-    p 'message send done'
+    Rakie::Log.debug('Client send message finished')
   end
 
   def on_close(channel)
-    p 'Client is closed'
+    Rakie::Log.debug('Client is closed')
   end
 end
 
